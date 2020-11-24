@@ -15,16 +15,53 @@ app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+////////////////////////////////////////////////////TEST ROUTES/////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////TEST ROUTES//////////////////////////////////////////////////////////
 app.get('/', (req, res) => {
-  res.send('woahhh horsey');
+  res.sendFile('./public/index.html');
 });
+
 //////////////////////////////////////////////ROUTES/////////////////////////////////////////////////////////////////
+
 app.get('/search', getCity);
 
 
+function getCity(req, res) {
+  let city = req.query.city;
+  console.log('are we finding the city', city);
+  let url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
+  let urlOne = `https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJVTPokywQkFQRmtVEaUZlJRA&key=${GOOGLE_API_KEY}`;
 
+  let urlThree = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=ATtYBwKHYJeS09ayLc48L31YwX56TmDxqiAiMDlOqdtOJRIVixCIIgrlmFcOJQOmz76kaxrxvOJ7pspBHtm7mdNrH6bh_2FB6FKno8UrcIghTTBh-6Iok-ccm6S7vpjvyAvSI33jOHCpt7JyEqhWZVsDKRbe_rr0zkdwc4s92FxAOgD3g6Io&key=${GOOGLE_API_KEY}`;
+
+  // superagent.get(url)
+  //   .then(data => {
+  //     console.log('what type of url', data.body);
+
+  //   })
+  superagent.get(urlOne)
+    .then(data => {
+      console.log('what type of urlOne', data.body.result.url);
+      res.render('./pages/details', { cityDetails: data.body.result.url });
+
+    })
+  // superagent.get(urlThree)
+  //   .then(data => {
+  //     //console.log('urlThree data', data.body)
+  //     res.render('./pages/details', { photoResult: data });
+
+
+  //   });
+
+
+}
+
+
+
+
+
+//result
 
 
 
