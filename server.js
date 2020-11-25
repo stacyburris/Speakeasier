@@ -34,37 +34,31 @@ app.get('/search', getCity);
 function getCity(req, res) {
   let obj = {};
   let city = req.query.city;
-  
+
   let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
-
-  let urlOne = `https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJVTPokywQkFQRmtVEaUZlJRA&key=${GOOGLE_API_KEY}`;
-
 
   let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
 
-    // superagent.get(googleKn)
-    // .then(data => {
-    //   // console.log('Google Knowledge', data);
-    //   // let array = [];
-    //   // data.body.itemListElement.map(results => {
-    //   //   array.push(results.result);
-    //   //   console.log(array);
-    //   // })
-    // })
+  // superagent.get(googleKn)
+  // .then(data => {
+  //   // console.log('Google Knowledge', data);
+  //   // let array = [];
+  //   // data.body.itemListElement.map(results => {
+  //   //   array.push(results.result);
+  //   //   console.log(array);
+  //   // })
+  // })
 
-  // superagent.get(url)
-  //   .then(data => {
-  //     console.log('what type of example url', data.body);
-  //   })
-  // obj.cityDetails = data.body.result.url; 
-
-  superagent.get(urlOne)
+  superagent.get(urlPlaceId)
     .then(data => {
-      console.log(data);
-      let photoReferenceArray = data.body.result.photos;
-      return photoReferenceArray.map(photos => photos.photo_reference)
-      })
-      .then(data => {
+      let pocket = data.body.candidates;
+      let photoRefs = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pocket[0].place_id}&key=${GOOGLE_API_KEY}`;
+      superagent.get(photoRefs)
+        .then(data => {
+          let photoReferenceArray = data.body.result.photos;
+          return photoReferenceArray.map(photos => photos.photo_reference)
+        })
+        .then(data => {
           let array = data.map(photoArray => {
             let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=200&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
             return url;
@@ -72,20 +66,20 @@ function getCity(req, res) {
           return array;
         })
         .then(banana => {
-         let photoArray = [];
-         banana.forEach(apple => {
-          photoArray.push(superagent.get(apple));
-        })
-        // console.log('PROMISE:', photoArray);
-        Promise.all(photoArray)
-          .then(potatoes => {
-            res.render('./pages/details', { render: potatoes });
-
+          let photoArray = [];
+          banana.forEach(apple => {
+            photoArray.push(superagent.get(apple));
           })
-          .catch(err => console.error(err));
-     })
-}
+          Promise.all(photoArray)
+            .then(potatoes => {
+              res.render('./pages/details', { render: potatoes });
 
+            })
+            .catch(err => console.error(err));
+        })
+
+    })
+}
 
 
 
