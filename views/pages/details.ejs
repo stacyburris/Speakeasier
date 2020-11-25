@@ -15,6 +15,21 @@
     <img src="<%= photo.request.url %>" alt="">
     <% }) %>
   </main>
+
+  <form action="/boarding_pass" method="POST">
+    <input type="hidden" name="city_name" value="<%= render.name %>">
+    <input type="hidden" name="city_description" value="<%= render.description %>">
+    <input type="hidden" name="city_url" value="">
+    <button type="submit">SAVE TO BOARDING PASS</button>
+  </form>
+  <form action="/stamped" method="POST">
+    <input type="hidden" name="city_name" value="<%= render.name %>">
+    <input type="hidden" name="city_description" value="<%= render.description %>">
+    <input type="hidden" name="city_url" value="">
+    <button type="submit">SAVE TO STAMPED</button>
+  </form>
+
+
 </body>
 
 </html>
