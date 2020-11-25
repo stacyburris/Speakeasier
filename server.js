@@ -30,24 +30,30 @@ app.get('/', (req, res) => {
 app.get('/search', getCity);
 // app.get('/search', getCountry);
 
-
 function getCity(req, res) {
   let obj = {};
   let city = req.query.city;
-
   let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
-
   let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
 
-  // superagent.get(googleKn)
-  // .then(data => {
-  //   // console.log('Google Knowledge', data);
-  //   // let array = [];
-  //   // data.body.itemListElement.map(results => {
-  //   //   array.push(results.result);
-  //   //   console.log(array);
-  //   // })
-  // })
+  superagent.get(googleKn)
+    .then(data => {
+      // console.log('Google Knowledge', data);
+
+      let array = [];
+      data.body.itemListElement.map(results => {
+        array.push(results.result);
+      })
+      console.log('NOT GOOGLE KNOWLEDGE:', array[0].detailedDescription.articleBody, array[0].name);
+      obj.description = array[0].detailedDescription.articleBody;
+      obj.name = array[0].name;
+    })
+    .then(tryIt => {
+      res.render('./pages/details', { give: obj })
+    })
+    .catch(err => console.error(err));
+
+  // :::::::::::::::::: RENDER IS NOT DEFINED ^^^^^^^:::::::::::::::::::::::::
 
   superagent.get(urlPlaceId)
     .then(data => {

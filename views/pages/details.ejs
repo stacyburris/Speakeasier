@@ -9,7 +9,10 @@
 
 <body>
   <main>
-    <% render.forEach(photo => { %> 
+    <h1><%= give.name %></h1>
+    <h2><%= give.description %></h2>
+
+    <% render.forEach(photo => { %>
     <img src="<%= photo.request.url %>" alt="">
     <% }) %>
   </main>
