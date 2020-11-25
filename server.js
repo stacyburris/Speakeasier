@@ -33,57 +33,50 @@ app.get('/search', getCity);
 function getCity(req, res) {
   let obj = {};
   let city = req.query.city;
-  let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
   let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
 
   superagent.get(googleKn)
     .then(data => {
-      // console.log('Google Knowledge', data);
-
       let array = [];
       data.body.itemListElement.map(results => {
         array.push(results.result);
       })
-      console.log('NOT GOOGLE KNOWLEDGE:', array[0].detailedDescription.articleBody, array[0].name);
       obj.description = array[0].detailedDescription.articleBody;
       obj.name = array[0].name;
+      console.log('OBJ:', obj);
     })
-    .then(tryIt => {
-      res.render('./pages/details', { give: obj })
-    })
-    .catch(err => console.error(err));
-
-  // :::::::::::::::::: RENDER IS NOT DEFINED ^^^^^^^:::::::::::::::::::::::::
-
-  superagent.get(urlPlaceId)
-    .then(data => {
-      let pocket = data.body.candidates;
-      let photoRefs = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pocket[0].place_id}&key=${GOOGLE_API_KEY}`;
-      superagent.get(photoRefs)
-        .then(data => {
-          let photoReferenceArray = data.body.result.photos;
-          return photoReferenceArray.map(photos => photos.photo_reference)
-        })
-        .then(data => {
-          let array = data.map(photoArray => {
-            let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=200&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
-            return url;
+    .then(() => {
+      let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
+      superagent.get(urlPlaceId)
+      .then(data => {
+        let pocket = data.body.candidates;
+        console.log('PLACE ID:', pocket);
+        let photoRefs = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pocket[0].place_id}&key=${GOOGLE_API_KEY}`;
+        superagent.get(photoRefs)
+          .then(data => {
+            let photoReferenceArray = data.body.result.photos;
+            return photoReferenceArray.map(photos => photos.photo_reference)
           })
-          return array;
-        })
-        .then(banana => {
-          let photoArray = [];
-          banana.forEach(apple => {
-            photoArray.push(superagent.get(apple));
-          })
-          Promise.all(photoArray)
-            .then(potatoes => {
-              res.render('./pages/details', { render: potatoes });
-
+          .then(data => {
+            let array = data.map(photoArray => {
+              let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=200&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
+              return url;
             })
-            .catch(err => console.error(err));
-        })
-
+            return array;
+          })
+          .then(banana => {
+            let photoArray = [];
+            banana.forEach(apple => {
+              photoArray.push(superagent.get(apple));
+            })
+            Promise.all(photoArray)
+              .then(potatoes => {
+                obj.photo = potatoes;
+                res.render('./pages/details', { render: obj });
+              })
+              .catch(err => console.error(err));
+          })
+      })
     })
 }
 
