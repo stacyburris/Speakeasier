@@ -9,10 +9,9 @@
 
 <body>
   <main>
-    <img src="<%= cityDetails %>">
-
-
-
+    <% render.forEach(photo => { %> 
+    <img src="<%= photo.request.url %>" alt="">
+    <% }) %>
   </main>
 </body>
 
