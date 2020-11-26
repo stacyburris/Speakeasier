@@ -22,6 +22,7 @@ const GOOGLE_KN_API_KEY = process.env.GOOGLE_KN_API_KEY;
 ////////////////////////////////////////////////////TEST ROUTES/////////////////////////////////////////////////////////
 app.post('/boarding_pass', saveBoarding);
 app.get('/boarding', renderBoarding);
+
 app.post('/stamped_pass', saveStamped);
 app.get('/stamped', renderStamped);
 app.delete('/deleteStamped/:location_id', deleteStamped);
@@ -122,17 +123,28 @@ function renderBoarding(req, res) {
 
 }
 
+// app.post('/stamped', saveStamped);
+app.get('/', (req, res) => {
+  res.sendFile('./public/index.html');
+});
+ 
+
+//////////////////////////////////////////////ROUTES/////////////////////////////////////////////////////////////////
+
 
 function saveStamped(req, res) {
   console.log('REQ STAMPED TO SAVE:', req.body);
   let { city_name, city_description, image_url } = req.body;
   let SQL = 'INSERT INTO stamped (city_name, city_description, image_url) VALUES ($1,$2,$3) RETURNING *;';
   let values = [city_name, city_description, image_url];
-
+  
   client.query(SQL, values)
     .then(res.redirect('/stamped'))
     .catch(err => console.error(err));
 }
+
+
+
 
 function renderStamped(req, res) {
   let SQL = 'SELECT * FROM stamped;';
