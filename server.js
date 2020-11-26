@@ -22,7 +22,14 @@ const GOOGLE_KN_API_KEY = process.env.GOOGLE_KN_API_KEY;
 ////////////////////////////////////////////////////TEST ROUTES/////////////////////////////////////////////////////////
 app.post('/boarding_pass', saveBoarding);
 app.get('/boarding', renderBoarding);
-// app.post('/stamped', saveStamped);
+
+app.post('/stamped_pass', saveStamped);
+app.get('/stamped', renderStamped);
+app.delete('/deleteStamped/:location_id', deleteStamped);
+app.delete('/deleteBoarding/:location_id', deleteBoarding);
+app.get('/pages/error', renderErrorPage);
+app.put('/move/:location_id', moveToStamped);
+
 app.get('/', (req, res) => {
   res.sendFile('./public/index.html');
 });
@@ -43,6 +50,9 @@ function getCity(req, res) {
       data.body.itemListElement.map(results => {
         array.push(results.result);
       })
+      if (!array[0] || !array[0].detailedDescription.articleBody) {
+        res.render('./pages/error', { error: { message: 'Page Not Found' } });
+      }
       obj.description = array[0].detailedDescription.articleBody;
       obj.name = array[0].name;
       console.log('OBJ:', obj);
@@ -61,7 +71,7 @@ function getCity(req, res) {
             })
             .then(data => {
               let array = data.map(photoArray => {
-                let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=200&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
+                let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
                 return url;
               })
               return array;
@@ -76,21 +86,28 @@ function getCity(req, res) {
                   obj.photo = potatoes;
                   res.render('./pages/details', { render: obj });
                 })
-                .catch(err => console.error(err));
+
+                .catch(err => {
+                  res.render('./pages/error', err);
+                })
             })
         })
     })
 }
 
 
+
+
+
 function saveBoarding(req, res) {
-  console.log('REQ TO SAVE:', req.body);
+  //console.log('REQ TO SAVE:', req.body);
   let { city_name, city_description, image_url } = req.body;
   let SQL = 'INSERT INTO boarding (city_name, city_description, image_url) VALUES ($1,$2,$3) RETURNING *;';
   let values = [city_name, city_description, image_url];
 
   client.query(SQL, values)
     .then(res.redirect('/boarding'))
+    .catch(err => console.error(err));
 }
 
 function renderBoarding(req, res) {
@@ -99,11 +116,81 @@ function renderBoarding(req, res) {
   return client.query(SQL)
     .then(dbInfo => {
       res.render('./pages/boarding', { boardingData: dbInfo.rows })
-      console.log('DB INFO FOR RENDERING:', dbInfo.rows);
-    });
+      //console.log('DB INFO FOR RENDERING:', dbInfo.rows);
+
+    })
+    .catch(err => console.error(err));
+
+}
+
+// app.post('/stamped', saveStamped);
+app.get('/', (req, res) => {
+  res.sendFile('./public/index.html');
+});
+ 
+
+//////////////////////////////////////////////ROUTES/////////////////////////////////////////////////////////////////
+
+
+function saveStamped(req, res) {
+  console.log('REQ STAMPED TO SAVE:', req.body);
+  let { city_name, city_description, image_url } = req.body;
+  let SQL = 'INSERT INTO stamped (city_name, city_description, image_url) VALUES ($1,$2,$3) RETURNING *;';
+  let values = [city_name, city_description, image_url];
+  
+  client.query(SQL, values)
+    .then(res.redirect('/stamped'))
+    .catch(err => console.error(err));
 }
 
 
+
+
+function renderStamped(req, res) {
+  let SQL = 'SELECT * FROM stamped;';
+
+  return client.query(SQL)
+    .then(dbInfo => {
+      res.render('./pages/stamped', { stampedData: dbInfo.rows })
+      console.log('DB STAMPED INFO FOR RENDERING:', dbInfo.rows);
+    })
+    .catch(err => console.error(err));
+}
+
+function deleteStamped(req, res) {
+  let SQL = `DELETE FROM stamped WHERE id=${req.params.location_id};`;
+  client.query(SQL)
+    .then(res.redirect('/stamped'))
+    .catch(err => console.error(err));
+}
+
+function deleteBoarding(req, res) {
+  let SQL = `DELETE FROM boarding WHERE id=${req.params.location_id};`;
+  client.query(SQL)
+    .then(res.redirect('/boarding'))
+    .catch(err => console.error(err));
+}
+
+function moveToStamped(req, res) {
+  let SQL = 'INSERT INTO stamped SELECT * FROM boarding WHERE id=$1;';
+  let values = [req.params.location_id];
+
+  client.query(SQL, values)
+    .then(() => {
+      SQL = 'DELETE FROM boarding WHERE id=$1;';
+      client.query(SQL, values)
+        .then(res.redirect('/stamped'))
+        .catch(err => console.error(err));
+    })
+
+    .catch(err => console.error(err));
+}
+
+
+
+function renderErrorPage(req, res) {
+  res.render('pages/error');
+}
 
 
 app.get('*', (req, res) => {
