@@ -4,9 +4,11 @@
       <% boardingData.forEach(location=>{%>
       <li class="" data-id="<%= location.id %>">
         <h4><%= location.city_name %> </h4>
+
         <img src="<%= location.image_url %>">
 
         <form action="/deleteBoarding/<%=location.id%>?_method=DELETE" method="POST">
+
           <button type="submit">REMOVE THIS LOCATION</button>
         </form>
 

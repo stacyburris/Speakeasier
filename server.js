@@ -94,10 +94,6 @@ function getCity(req, res) {
     })
 }
 
-
-
-
-
 function saveBoarding(req, res) {
   //console.log('REQ TO SAVE:', req.body);
   let { city_name, city_description, image_url } = req.body;
@@ -116,63 +112,8 @@ function renderBoarding(req, res) {
     .then(dbInfo => {
       res.render('./pages/boarding', { boardingData: dbInfo.rows })
       //console.log('DB INFO FOR RENDERING:', dbInfo.rows);
-
     })
     .catch(err => console.error(err));
-
-}
-
-app.get('/search', getCity);
-// app.get('/search', getCountry);
-
-function getCity(req, res) {
-  let obj = {};
-  let city = req.query.city;
-  let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
-
-  superagent.get(googleKn)
-    .then(data => {
-      let array = [];
-      data.body.itemListElement.map(results => {
-        array.push(results.result);
-      })
-      obj.description = array[0].detailedDescription.articleBody;
-      obj.name = array[0].name;
-      console.log('OBJ:', obj);
-    })
-    .then(() => {
-      let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
-      superagent.get(urlPlaceId)
-      .then(data => {
-        let pocket = data.body.candidates;
-        console.log('PLACE ID:', pocket);
-        let photoRefs = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pocket[0].place_id}&key=${GOOGLE_API_KEY}`;
-        superagent.get(photoRefs)
-          .then(data => {
-            let photoReferenceArray = data.body.result.photos;
-            return photoReferenceArray.map(photos => photos.photo_reference)
-          })
-          .then(data => {
-            let array = data.map(photoArray => {
-              let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=200&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
-              return url;
-            })
-            return array;
-          })
-          .then(banana => {
-            let photoArray = [];
-            banana.forEach(apple => {
-              photoArray.push(superagent.get(apple));
-            })
-            Promise.all(photoArray)
-              .then(potatoes => {
-                obj.photo = potatoes;
-                res.render('./pages/details', { render: obj });
-              })
-              .catch(err => console.error(err));
-          })
-      })
-    })
 }
 
 function saveStamped(req, res) {
@@ -188,7 +129,6 @@ function saveStamped(req, res) {
 
 function renderStamped(req, res) {
   let SQL = 'SELECT * FROM stamped;';
-
   return client.query(SQL)
     .then(dbInfo => {
       res.render('./pages/stamped', { stampedData: dbInfo.rows })
@@ -212,7 +152,7 @@ function deleteBoarding(req, res) {
 }
 
 function moveToStamped(req, res) {
-  let SQL = 'INSERT INTO stamped SELECT * FROM boarding WHERE id=$1;';
+  let SQL = 'INSERT INTO stamped (city_name, image_url) SELECT city_name, image_url FROM boarding WHERE id=$1;';
   let values = [req.params.location_id];
 
   client.query(SQL, values)
@@ -222,25 +162,18 @@ function moveToStamped(req, res) {
         .then(res.redirect('/stamped'))
         .catch(err => console.error(err));
     })
-
     .catch(err => console.error(err));
 }
-
-
 
 function renderErrorPage(req, res) {
   res.render('pages/error');
 }
 
-
-app.get('*', (req, res) => {
-  res.render('pages/error', { error: new Error('page not found') });
-})
-
-
-
-
-/////////////////////////////////connection//////port///////////catcher///////////////////////////////////////////////////
+// app.post('/stamped', saveStamped);
+app.get('/', (req, res) => {
+  res.sendFile('./public/index.html');
+});
+ 
 client.connect()
   .then(() => {
     app.listen(PORT, () => {
@@ -248,27 +181,6 @@ client.connect()
     })
   })
 client.on('error', err => console.err(err));
-
-
-
-
-
-// query
-// // SELECT * FROM TableOld
-// // WHERE []
-// query
-// // INSERT INTO TableNew
-// query
-// // DELETE FROM TableOld
-
-
-
-
-
-
-
-
-
 
 
 
