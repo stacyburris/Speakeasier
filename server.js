@@ -6,6 +6,7 @@ const app = express();
 const superagent = require('superagent');
 const methodOverride = require('method-override');
 const pg = require('pg');
+
 require('dotenv').config();
 const client = new pg.Client(process.env.DATABASE_URL);
 const PORT = process.env.PORT || 3333;
@@ -18,7 +19,9 @@ app.set('view engine', 'ejs');
 
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 const GOOGLE_KN_API_KEY = process.env.GOOGLE_KN_API_KEY;
-////////////////////////////////////////////////////TEST ROUTES/////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////ROUTES/////////////////////////////////////////////////////////////////
+
 app.post('/boarding_pass', saveBoarding);
 app.get('/boarding', renderBoarding);
 app.post('/stamped_pass', saveStamped);
@@ -32,8 +35,6 @@ app.get('/', (req, res) => {
   res.sendFile('./public/index.html');
 });
 
-//////////////////////////////////////////////ROUTES/////////////////////////////////////////////////////////////////
-
 app.get('/search', getCity);
 // app.get('/search', getCountry);
 
@@ -44,6 +45,7 @@ function getCity(req, res) {
 
   superagent.get(googleKn)
     .then(data => {
+      // console.log('GOOGLE KN:', data);
       let array = [];
       data.body.itemListElement.map(results => {
         array.push(results.result);
@@ -53,23 +55,43 @@ function getCity(req, res) {
       }
       obj.description = array[0].detailedDescription.articleBody;
       obj.name = array[0].name;
-      console.log('OBJ:', obj);
     })
     .then(() => {
       let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
       superagent.get(urlPlaceId)
         .then(data => {
           let pocket = data.body.candidates;
-          console.log('PLACE ID:', pocket);
+          // console.log('DATA.BODY:', data.body);
           let photoRefs = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pocket[0].place_id}&key=${GOOGLE_API_KEY}`;
+
+          ////////////////////////// Country Info . . . on hold. //////////////////////////////////
+          // superagent.get(photoRefs)
+          //   .then(data => {
+          //     let formattedAddress = data.body.result.formatted_address;
+          //     console.log('Formatted Address:', formattedAddress);
+          //     let countryURL = 'https://restcountries.eu/rest/v2/all';
+              
+          //     superagent.get(countryURL)
+          //       .then(carrot => {
+          //         let body = carrot.body;
+          //         body.forEach(value => {
+          //         })
+          //       console.log(body[1].name);
+          //         // for (let i=0; i<carrot.length; i++) {
+          //         //     if (carrot[i].name = formattedAddress) {
+          //         })
+          //       })
+          ////////////////////////// Country Info . . . on hold. //////////////////////////////////
+
           superagent.get(photoRefs)
             .then(data => {
+              // console.log('PLACE-ID:', data);
               let photoReferenceArray = data.body.result.photos;
               return photoReferenceArray.map(photos => photos.photo_reference)
             })
             .then(data => {
               let array = data.map(photoArray => {
-                let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
+                let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=300&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
                 return url;
               })
               return array;
@@ -84,17 +106,16 @@ function getCity(req, res) {
                   obj.photo = potatoes;
                   res.render('./pages/details', { render: obj });
                 })
-
                 .catch(err => {
                   res.render('./pages/error', err);
                 })
             })
         })
     })
+
 }
 
 function saveBoarding(req, res) {
-  //console.log('REQ TO SAVE:', req.body);
   let { city_name, city_description, image_url } = req.body;
   let SQL = 'INSERT INTO boarding (city_name, city_description, image_url) VALUES ($1,$2,$3) RETURNING *;';
   let values = [city_name, city_description, image_url];
@@ -110,13 +131,11 @@ function renderBoarding(req, res) {
   return client.query(SQL)
     .then(dbInfo => {
       res.render('./pages/boarding', { boardingData: dbInfo.rows })
-      //console.log('DB INFO FOR RENDERING:', dbInfo.rows);
     })
     .catch(err => console.error(err));
 }
 
 function saveStamped(req, res) {
-  console.log('REQ STAMPED TO SAVE:', req.body);
   let { city_name, city_description, image_url } = req.body;
   let SQL = 'INSERT INTO stamped (city_name, city_description, image_url) VALUES ($1,$2,$3) RETURNING *;';
   let values = [city_name, city_description, image_url];
@@ -131,7 +150,6 @@ function renderStamped(req, res) {
   return client.query(SQL)
     .then(dbInfo => {
       res.render('./pages/stamped', { stampedData: dbInfo.rows })
-      console.log('DB STAMPED INFO FOR RENDERING:', dbInfo.rows);
     })
     .catch(err => console.error(err));
 }

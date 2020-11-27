@@ -6,16 +6,24 @@
   <link rel="stylesheet" href="" type="text/html">
 </head>
 
-
 <body>
+
   <main>
+    <% let imageArray = [] %>
+    <% render.photo.forEach(photo => { %>
+      <% imageArray.push(photo.request.url) %>
+      <% }) %>
+      <img src="<%= imageArray[0] %>" alt="">
+
     <h1><%= render.name %></h1>
     <h2><%= render.description %></h2>
-    <% render.photo.forEach(photo => { %>
-    <img src="<%= photo.request.url %>" alt="">
+    
+    <% imageArray.shift() %>
+    <% imageArray.forEach(photo => { %>
+      <img src="<%= photo %>" alt="">
     <% }) %>
-  </main>
 
+  </main>
   <form action="/boarding_pass" method="POST">
     <input type="hidden" name="city_name" value="<%= render.name %>">
     <input type="hidden" name="city_description" value="<%= render.description %>">
