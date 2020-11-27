@@ -6,7 +6,6 @@ const app = express();
 const superagent = require('superagent');
 const methodOverride = require('method-override');
 const pg = require('pg');
-const { promiseImpl } = require('ejs');
 require('dotenv').config();
 const client = new pg.Client(process.env.DATABASE_URL);
 const PORT = process.env.PORT || 3333;
@@ -174,7 +173,7 @@ function renderErrorPage(req, res) {
 app.get('/', (req, res) => {
   res.sendFile('./public/index.html');
 });
- 
+
 client.connect()
   .then(() => {
     app.listen(PORT, () => {
