@@ -35,10 +35,6 @@ app.get('/', (req, res) => {
   res.sendFile('./public/index.html');
 });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> b61e72adba6a454c78ac0140b8cf9676f9d13602
 app.get('/search', getCity);
 // app.get('/search', getCountry);
 
