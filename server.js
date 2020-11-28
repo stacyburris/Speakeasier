@@ -37,13 +37,14 @@ app.get('/', (req, res) => {
 
 app.get('/search', getCity);
 // app.get('/search', getCountry);
+app.get('/getSavedBoarding', getSavedBoarding);
+app.get('/getSavedStamped', getSavedStamped);
 
 function getCity(req, res) {
-  console.log('FROM SAVED PAGE:', req.query)
+  // console.log('FROM SAVED PAGE:', req.query)
   let obj = {};
   let city = req.query.city;
   let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
-
 
 
   superagent.get(googleKn)
@@ -185,14 +186,27 @@ function moveToStamped(req, res) {
     .catch(err => console.error(err));
 }
 
+function getSavedBoarding(req, res) {
+  let id = req.query.id;
+  let SQL = `SELECT * FROM boarding WHERE id=${id}`;
+  client.query(SQL)
+    .then(drDre => {
+      res.render('./pages/details2', { beyonce: drDre.rows })
+    })
+}
+
+function getSavedStamped(req, res) {
+  let id = req.query.id;
+  let SQL = `SELECT * FROM stamped WHERE id=${id}`;
+  client.query(SQL)
+    .then(drDre => {
+      res.render('./pages/details2', { beyonce: drDre.rows })
+    })
+}
+
 function renderErrorPage(req, res) {
   res.render('pages/error');
 }
-
-// app.post('/stamped', saveStamped);
-app.get('/', (req, res) => {
-  res.sendFile('./public/index.html');
-});
 
 client.connect()
   .then(() => {

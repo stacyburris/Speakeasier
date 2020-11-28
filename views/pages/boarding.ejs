@@ -3,8 +3,8 @@
     <ul>
       <% boardingData.forEach(location=>{%>
       <li class="" data-id="<%= location.id %>">
-        <form action="/search" method="GET">
-          <input type="hidden" name="city" value="<%= location.city_name %>"><br>
+        <form action="/getSavedBoarding" method="GET">
+          <input type="hidden" name="id" value="<%=location.id %>"><br>
           <input type="submit" value="<%= location.city_name %>">
         </form>
 
