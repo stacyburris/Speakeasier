@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="" type="text/html">
+</head>
+
+<body>
+
+  <main>
+    <div>
+
+      <img src="<%= beyonce[0].special %>" alt="">
+      <h1><%= beyonce[0].city_name %></h1>
+      <h2><%= beyonce[0].city_description %></h2>
+      <img src="<%= beyonce[0].images0 %>" alt="">
+      <img src="<%= beyonce[0].images1 %>" alt="">
+      <img src="<%= beyonce[0].images2 %>" alt="">
+      <img src="<%= beyonce[0].images3 %>" alt="">
+      <img src="<%= beyonce[0].images4 %>" alt="">
+      <img src="<%= beyonce[0].images5 %>" alt="">
+      <img src="<%= beyonce[0].images6 %>" alt="">
+      <img src="<%= beyonce[0].images7 %>" alt="">
+      <img src="<%= beyonce[0].images8 %>" alt="">
+    </div>
+
+
+
+    <!-- <legend>Notes</legend> -->
+    <form action="/addNotesBoarding/<%=beyonce[0].city_name%>?_method=PUT" method="POST">
+
+      <label for="journal"> </label>
+      <textarea type="text" rows="4" cols="" name="journal" data-id="<%=beyonce[0].city_name%>"
+        placeholder="Use this space to make notes for this location including thoughts, hopes, dreams and a packing list"></textarea>
+      <button type="submit">UPDATE JOURNAL</button>
+
+
+    </form>
+  </main>
+
+</body>
+
+</html>
