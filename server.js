@@ -173,7 +173,7 @@ function deleteBoarding(req, res) {
 }
 
 function moveToStamped(req, res) {
-  let SQL = 'INSERT INTO stamped (city_name, special) SELECT city_name, special FROM boarding WHERE id=$1;';
+  let SQL = 'INSERT INTO stamped (city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8) SELECT city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8 FROM boarding WHERE id=$1;';
   let values = [req.params.location_id];
 
   client.query(SQL, values)
