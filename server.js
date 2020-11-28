@@ -30,7 +30,8 @@ app.delete('/deleteStamped/:location_id', deleteStamped);
 app.delete('/deleteBoarding/:location_id', deleteBoarding);
 app.get('/pages/error', renderErrorPage);
 app.put('/move/:location_id', moveToStamped);
-
+// app.put('/addNotesStamped/:city_name', addNotesStamped);
+app.put('/addNotesBoarding/:city_name', addNotesBoarding);
 app.get('/', (req, res) => {
   res.sendFile('./public/index.html');
 });
@@ -191,7 +192,7 @@ function getSavedBoarding(req, res) {
   let SQL = `SELECT * FROM boarding WHERE id=${id}`;
   client.query(SQL)
     .then(drDre => {
-      res.render('./pages/details2', { beyonce: drDre.rows })
+      res.render('./pages/detailsBoarding', { beyonce: drDre.rows })
     })
 }
 
@@ -200,9 +201,32 @@ function getSavedStamped(req, res) {
   let SQL = `SELECT * FROM stamped WHERE id=${id}`;
   client.query(SQL)
     .then(drDre => {
-      res.render('./pages/details2', { beyonce: drDre.rows })
+      res.render('./pages/detailsStamped', { beyonce: drDre.rows })
     })
 }
+function addNotesBoarding(req, res) {
+  console.log('ADDING NOTES:', req.body.journal);
+  let { journal } = req.body.journal;
+  let SQL = `UPDATE boarding SET journal=$1 WHERE city_name=$2;`;
+
+  let values = [journal, req.params.city_name];
+  client.query(SQL, values)
+    .then(lemon => {
+      res.render('./pages/detailsBoarding', { savedJournal: lemon.rows })
+      console.log('LEMON ROWS:', lemon.rows);
+    })
+}
+// function addNotesStamped(req, res) {
+//   console.log('ADDING NOTES:', req.params);
+
+//   let SQL = `UPDATE stamped SET journal=$1 WHERE city_name=${req.params.city_name};`;
+
+//   let values = [req.params.city_name];
+//   client.query(SQL, values)
+//     .then(lemon => {
+//       console.log('LEMON:', lemon.rows);
+//     })
+// }
 
 function renderErrorPage(req, res) {
   res.render('pages/error');
