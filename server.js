@@ -39,9 +39,12 @@ app.get('/search', getCity);
 // app.get('/search', getCountry);
 
 function getCity(req, res) {
+  console.log('FROM SAVED PAGE:', req.query)
   let obj = {};
   let city = req.query.city;
   let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
+
+
 
   superagent.get(googleKn)
     .then(data => {
@@ -70,7 +73,7 @@ function getCity(req, res) {
           //     let formattedAddress = data.body.result.formatted_address;
           //     console.log('Formatted Address:', formattedAddress);
           //     let countryURL = 'https://restcountries.eu/rest/v2/all';
-              
+
           //     superagent.get(countryURL)
           //       .then(carrot => {
           //         let body = carrot.body;
@@ -116,9 +119,9 @@ function getCity(req, res) {
 }
 
 function saveBoarding(req, res) {
-  let { city_name, city_description, image_url } = req.body;
-  let SQL = 'INSERT INTO boarding (city_name, city_description, image_url) VALUES ($1,$2,$3) RETURNING *;';
-  let values = [city_name, city_description, image_url];
+  let { city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8 } = req.body;
+  let SQL = 'INSERT INTO boarding (city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *;';
+  let values = [city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8];
 
   client.query(SQL, values)
     .then(res.redirect('/boarding'))
@@ -136,9 +139,9 @@ function renderBoarding(req, res) {
 }
 
 function saveStamped(req, res) {
-  let { city_name, city_description, image_url } = req.body;
-  let SQL = 'INSERT INTO stamped (city_name, city_description, image_url) VALUES ($1,$2,$3) RETURNING *;';
-  let values = [city_name, city_description, image_url];
+  let { city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8 } = req.body;
+  let SQL = 'INSERT INTO stamped (city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *;';
+  let values = [city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8];
 
   client.query(SQL, values)
     .then(res.redirect('/stamped'))
@@ -169,7 +172,7 @@ function deleteBoarding(req, res) {
 }
 
 function moveToStamped(req, res) {
-  let SQL = 'INSERT INTO stamped (city_name, image_url) SELECT city_name, image_url FROM boarding WHERE id=$1;';
+  let SQL = 'INSERT INTO stamped (city_name, special) SELECT city_name, special FROM boarding WHERE id=$1;';
   let values = [req.params.location_id];
 
   client.query(SQL, values)

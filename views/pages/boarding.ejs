@@ -3,9 +3,12 @@
     <ul>
       <% boardingData.forEach(location=>{%>
       <li class="" data-id="<%= location.id %>">
-        <h4><%= location.city_name %> </h4>
+        <form action="/search" method="GET">
+          <input type="hidden" name="city" value="<%= location.city_name %>"><br>
+          <input type="submit" value="<%= location.city_name %>">
+        </form>
 
-        <img src="<%= location.image_url %>">
+        <img src="<%= location.special %>">
 
         <form action="/deleteBoarding/<%=location.id%>?_method=DELETE" method="POST">
 
