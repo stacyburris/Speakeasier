@@ -42,11 +42,13 @@ app.get('/getSavedBoarding', getSavedBoarding);
 app.get('/getSavedStamped', getSavedStamped);
 
 function getCity(req, res) {
-  // console.log('FROM SAVED PAGE:', req.query)
+  if (req.query.city === 'speakeasier') {
+    res.sendFile('./public/about-us.html', {root: __dirname });
+  } else {
+
   let obj = {};
   let city = req.query.city;
   let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
-
 
   superagent.get(googleKn)
     .then(data => {
@@ -117,7 +119,7 @@ function getCity(req, res) {
             })
         })
     })
-
+  }
 }
 
 function saveBoarding(req, res) {
