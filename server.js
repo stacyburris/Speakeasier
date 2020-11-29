@@ -31,7 +31,7 @@ app.delete('/deleteBoarding/:location_id', deleteBoarding);
 app.get('/pages/error', renderErrorPage);
 app.put('/move/:location_id', moveToStamped);
 // app.put('/addNotesStamped/:city_name', addNotesStamped);
-app.put('/addNotesBoarding/:city_name', addNotesBoarding);
+app.put('/addNotesBoarding/:id', addNotesBoarding);
 app.get('/', (req, res) => {
   res.sendFile('./public/index.html');
 });
@@ -206,15 +206,13 @@ function getSavedStamped(req, res) {
 }
 function addNotesBoarding(req, res) {
   console.log('ADDING NOTES:', req.body.journal);
-  let { journal } = req.body.journal;
-  let SQL = `UPDATE boarding SET journal=$1 WHERE city_name=$2;`;
-
-  let values = [journal, req.params.city_name];
+  console.log('REQ Params:', req.params.id);
+  let { journal } = req.body;
+  let SQL = `UPDATE boarding SET journal=$1 WHERE id=$2;`;
+  let values = [journal, req.params.id];
   client.query(SQL, values)
-    .then(lemon => {
-      res.render('./pages/detailsBoarding', { savedJournal: lemon.rows })
-      console.log('LEMON ROWS:', lemon.rows);
-    })
+    .then(res.redirect('/getSavedBoarding'))
+    .catch(err => console.error(err));
 }
 // function addNotesStamped(req, res) {
 //   console.log('ADDING NOTES:', req.params);
