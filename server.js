@@ -30,7 +30,8 @@ app.delete('/deleteStamped/:location_id', deleteStamped);
 app.delete('/deleteBoarding/:location_id', deleteBoarding);
 app.get('/pages/error', renderErrorPage);
 app.put('/move/:location_id', moveToStamped);
-
+app.put('/addNotesStamped/:loc_id', addNotesStamped);
+app.put('/addNotesBoarding/:loc_id', addNotesBoarding);
 app.get('/', (req, res) => {
   res.sendFile('./public/index.html');
 });
@@ -41,11 +42,13 @@ app.get('/getSavedBoarding', getSavedBoarding);
 app.get('/getSavedStamped', getSavedStamped);
 
 function getCity(req, res) {
-  // console.log('FROM SAVED PAGE:', req.query)
+  if (req.query.city === 'speakeasier') {
+    res.sendFile('./public/about-us.html', {root: __dirname });
+  } else {
+
   let obj = {};
   let city = req.query.city;
   let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
-
 
   superagent.get(googleKn)
     .then(data => {
@@ -116,7 +119,7 @@ function getCity(req, res) {
             })
         })
     })
-
+  }
 }
 
 function saveBoarding(req, res) {
@@ -173,7 +176,7 @@ function deleteBoarding(req, res) {
 }
 
 function moveToStamped(req, res) {
-  let SQL = 'INSERT INTO stamped (city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8) SELECT city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8 FROM boarding WHERE id=$1;';
+  let SQL = 'INSERT INTO stamped (city_name, city_description, special, journal, images0, images1, images2, images3, images4, images5, images6, images7, images8) SELECT city_name, city_description, special, journal, images0, images1, images2, images3, images4, images5, images6, images7, images8 FROM boarding WHERE id=$1;';
   let values = [req.params.location_id];
 
   client.query(SQL, values)
@@ -191,7 +194,7 @@ function getSavedBoarding(req, res) {
   let SQL = `SELECT * FROM boarding WHERE id=${id}`;
   client.query(SQL)
     .then(drDre => {
-      res.render('./pages/details2', { beyonce: drDre.rows })
+      res.render('./pages/detailsBoarding', { beyonce: drDre.rows })
     })
 }
 
@@ -200,8 +203,32 @@ function getSavedStamped(req, res) {
   let SQL = `SELECT * FROM stamped WHERE id=${id}`;
   client.query(SQL)
     .then(drDre => {
-      res.render('./pages/details2', { beyonce: drDre.rows })
+      res.render('./pages/detailsStamped', { beyonce: drDre.rows })
     })
+}
+function addNotesBoarding(req, res) {
+  let awesome = req.body.journaldata;
+  let ok = req.params.loc_id;
+  // console.log('this is awesome:', awesome);
+  // console.log('this is ok:', ok);
+  let SQL = `UPDATE boarding SET journal='${awesome}' WHERE id=${ok} RETURNING *;`;
+  // let SQL = `INSERT INTO boarding WHERE journal='${awesome}' WHERE id=${ok} RETURNING *;`;
+
+  client.query(SQL)
+    .then(res.redirect(`/getSavedBoarding?id=${ok}`))
+    .catch(err => console.error(err));
+}
+
+function addNotesStamped(req, res) {
+  let dope = req.body.journaldata;
+  let nice = req.params.loc_id;
+  // console.log('this is dope:', dope);
+  // console.log('this is nice:', nice);
+  let SQL = `UPDATE stamped SET journal='${dope}' WHERE id=${nice} RETURNING *;`;
+
+  client.query(SQL)
+    .then(res.redirect(`/getSavedStamped?id=${nice}`))
+    .catch(err => console.error(err));
 }
 
 function renderErrorPage(req, res) {
