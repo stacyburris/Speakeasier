@@ -25,17 +25,14 @@
       <img src="<%= beyonce[0].images8 %>" alt="">
     </div>
 
-
+    <h3><%=beyonce[0].journal%></h3>
 
     <!-- <legend>Notes</legend> -->
-    <form action="/addNotesBoarding/<%=beyonce[0].city_name%>?_method=PUT" method="POST">
-
-      <label for="journal"> </label>
-      <textarea type="text" rows="4" cols="" name="journal" data-id="<%=beyonce[0].city_name%>"
-        placeholder="Use this space to make notes for this location including thoughts, hopes, dreams and a packing list"></textarea>
+    <form action="/addNotesBoarding/<%=beyonce[0].id%>?_method=PUT" method="POST">
+      <input type="hidden" name="id" value="<%=beyonce[0].id %>">
+      <textarea name="journaldata" value="<%=beyonce[0].journal%>"
+        placeholder="UPDATE THIS SECTION WITH YOUR HOPES, DESIRES AND DREAMS.... AND MAYBE A PACKING LIST!"></textarea>
       <button type="submit">UPDATE JOURNAL</button>
-
-
     </form>
   </main>
 
