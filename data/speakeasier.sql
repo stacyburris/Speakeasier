@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS boarding;
 
 CREATE TABLE boarding(
 id SERIAL PRIMARY KEY,
-city_name VARCHAR(255),
+city_name VARCHAR(255) UNIQUE,
 city_description TEXT,
 special VARCHAR,
 packing_list TEXT,
@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS stamped;
 
 CREATE TABLE stamped(
 id SERIAL PRIMARY KEY,
-city_name VARCHAR(255),
+city_name VARCHAR(255) UNIQUE,
 city_description TEXT,
 special VARCHAR,
 packing_list TEXT,
