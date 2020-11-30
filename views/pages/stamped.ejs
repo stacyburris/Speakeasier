@@ -6,25 +6,33 @@
 </head>
 
 <body>
+  <header>
+    <h2 id="stamped-header">STAMPED</h2>
+    <nav>
+      <a href="/">HOME</a>
+      <a href="/boarding">BOARDING</a>
+    </nav>
+  </header>
   <main>
-    <ul>
-      <% stampedData.forEach(location=>{%>
-      <li class="" data-id="<%= location.id %>">
-        <form action="/getSavedStamped" method="GET">
-          <input type="hidden" name="id" value="<%=location.id %>"><br>
-          <input type="submit" value="<%= location.city_name %>">
-        </form>
+    <main>
+      <ul>
+        <% stampedData.forEach(location=>{%>
+        <li class="" data-id="<%= location.id %>">
+          <form action="/getSavedStamped" method="GET">
+            <input type="hidden" name="id" value="<%=location.id %>"><br>
+            <input type="submit" value="<%= location.city_name %>">
+          </form>
 
-        <img src="<%= location.special %>">
+          <img src="<%= location.special %>">
 
 
-        <form action="/deleteStamped/<%=location.id%>?_method=DELETE" method="POST">
-          <button type="submit">REMOVE THIS LOCATION</button>
-        </form>
-        <%})%>
+          <form action="/deleteStamped/<%=location.id%>?_method=DELETE" method="POST">
+            <button type="submit">REMOVE THIS LOCATION</button>
+          </form>
+          <%})%>
 
-    </ul>
-  </main>
+      </ul>
+    </main>
 </body>
 
 </html>

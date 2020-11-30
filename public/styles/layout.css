@@ -1,4 +1,87 @@
-/* This is the background image of index.html */
+.boarding-back{
+   background: url('../img/red-door2.png') rgb(228, 188, 188) no-repeat center fixed;
+   overflow: hidden;
+   background-size: 50%;
+   border: 20px solid rgb(172, 154, 154);
+   border-radius: 15px; 
+   box-sizing: border-box;
+   }
+
+ #boarding-header{
+  font-family: 'Limelight', cursive;
+  font-size: 5vw;
+  color: rgba(36, 30, 30, 0.925);
+  border-radius: 10px;
+  padding: 15px 35px;
+} 
+
+.header-box{
+ width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.navers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
+} 
+
+.navers > a{
+ margin: 5px;
+ text-align: center;
+ border-radius: 10px;
+padding: 10px;
+width: 75px;
+color:rgba(36, 30, 30, 0.925);
+background-color: whitesmoke;
+font-family: 'Josefin Sans', sans-serif;
+}
+
+ .container{
+   overflow: scroll;
+   height: 100vh;
+   width: 90%; 
+   padding: 20px;
+   margin: auto;
+}
+
+.container::-webkit-scrollbar{
+  width: 0px; 
+ background: transparent; 
+}
+
+.place-name{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.images-role{
+  border-radius: 10px;
+}
+
+.images{ 
+   border: 4px solid rgb(172, 154, 154);
+  width: 15vw;
+  border-radius: 8px;
+}
+
+.three-buttons{
+  margin-left: 3vw;
+}
+
+.hugs{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .background-image {
   position: absolute;
   top: 0;
@@ -22,16 +105,15 @@ background-color: rgba(169, 217, 243, 0.8);
 }
 
 .homepage-h2 {
-  margin-top: 0.5vh;
-  padding-top: 1vh;
-  font-size: 2.5vw;
-  color: white;
-  border-top: 6px solid white;
-  border-radius: 15px;
+ margin-top: 0.5vh;
+ padding-top: 1vh;
+ font-size: 2.5vw;
+ color: white;
+ border-top: 6px solid white;
+ border-radius: 15px;
 }
 
 .homepage-form {
-/* border: 2px solid orange; */
 width: 80%;
 display: flex;
 justify-content: space-between;
@@ -54,7 +136,6 @@ transition: 1s all;
 
 ::placeholder {
   color: white;
-  /* text-align: center; */
   font-size: 1.5vw;
 }
 
@@ -82,12 +163,54 @@ transition: 1s all;
 }
 
 .authors-bio {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 7vh;
 }
+
+.loc-name{
+  outline: none;
+  font-family: 'Limelight', cursive;
+  font-size: 2vw;
+  padding: 5%;
+  border: 2px solid rgb(206, 194, 194);
+  border-radius: 12px;
+  background-color: rgba(252, 242, 212, 0.952);
+  font-weight: bolder;
+  color: rgba(36, 30, 30, 0.925);
+  transition: 1s all;
+  width: 20vw;
+}
+
+.loc-name:hover {
+  background-color:rgb(206, 194, 194);
+  border: 2px solid rgba(252, 242, 212, 0.952);
+  transition: 1s all;
+  cursor: pointer;
+  }
+
+.back-buttons{
+  outline: none;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .8vw;
+  padding: 3%;
+  border: 2px solid rgb(206, 194, 194);
+  border-radius: 12px;
+  background-color: rgba(252, 242, 212, 0.952);
+  font-weight: bolder;
+  color:rgba(36, 30, 30, 0.925);
+  margin: 5%;
+  transition: 1s all;
+}
+
+.back-buttons:hover {
+  background-color:rgb(206, 194, 194);
+  border: 2px solid rgba(252, 242, 212, 0.952);
+  transition: 1s all;
+  cursor: pointer;
+  }
+ 
+.surrounder{
+    display: flex;
+  }
 
 .authors-bio h2 {
   padding: 1vh 0;
@@ -117,6 +240,7 @@ transition: 1s all;
   border-radius: 14px;
   list-style-type: circle;
 }
+
 .author-bullets li {
   padding: 0.5vh;
   font-size: 1vw

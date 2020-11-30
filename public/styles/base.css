@@ -13,7 +13,6 @@ h2 {
   -webkit-animation: fadein 2s;
 }
 
-
 a {
   text-decoration: none;
   color: white;
@@ -58,6 +57,12 @@ nav {
   display: flex;
   justify-content: center;
 }
+
+body{
+  width: 50%;
+  height: 115vh;
+  margin: auto;
+  }
   
 .detailsBody{
   width: 18.5vw;
