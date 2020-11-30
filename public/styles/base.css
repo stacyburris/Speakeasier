@@ -1,31 +1,78 @@
-
-
 h1{
   font-family: 'Limelight', cursive;
-  font-size: xx-large;
+  font-size: 70px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  margin: 30px;
+  /* background-color: rgba(245, 245, 220, .6); */
+
+  -webkit-animation: fadein 2s;
 }
+
+
+
 h2{
+  margin-top: 50px;
   font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Limelight', cursive;
-  font-size: large;
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(21, 27, 27, 0.6);
+  border: 5px solid rgba(21, 27, 27, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  -webkit-animation: fadein 2s;
 }
 a{
   text-decoration: none;
+  color: white;
+  font-size: 20px;
 }
 nav{
   font-family: 'Josefin Sans', sans-serif;
   font-family: 'Limelight', cursive;
   font-size: small;
+  text-align: center;
 }
-body{
-width: 18.5vw;
-height: 66.5vh;
-background-color: rgb(156, 100, 100);
-margin: auto;
+.detailsBody{
+
+  width: 18.5vw;
+  height: 66.5vh;
+  background: url("/img/detailsss.JPG") no-repeat center fixed;
+  background-size: cover;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
 }
+
+.boardingDetailsBody{
+  width: 18.5vw;
+  height: 66.5vh;
+  background: url("/img/detailsBoarding.jpg") no-repeat center fixed;
+  background-size: cover;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.stampedDetailsBody{
+  width: 18.5vw;
+  height: 66.5vh;
+  background: url("/img/3.PNG") no-repeat center fixed;
+  background-size: cover;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
 header{
 
-}
+} 
 main{
 
 }
