@@ -41,9 +41,11 @@ app.get('/search', getCity);
 app.get('/getSavedBoarding', getSavedBoarding);
 app.get('/getSavedStamped', getSavedStamped);
 
+app.get('*', renderErrorPage);
+
 function getCity(req, res) {
   if (req.query.city === 'speakeasier') {
-    res.sendFile('./public/about-us.html', {root: __dirname });
+    res.sendFile('./public/about-us.html', {root: __dirname })
   } else {
 
   let obj = {};
@@ -52,13 +54,12 @@ function getCity(req, res) {
 
   superagent.get(googleKn)
     .then(data => {
-      // console.log('GOOGLE KN:', data);
       let array = [];
       data.body.itemListElement.map(results => {
         array.push(results.result);
       })
       if (!array[0] || !array[0].detailedDescription.articleBody) {
-        res.render('./pages/error', { error: { message: 'Page Not Found' } });
+        res.render('./pages/error', wack);
       }
       obj.description = array[0].detailedDescription.articleBody;
       obj.name = array[0].name;
@@ -213,7 +214,7 @@ function addNotesBoarding(req, res) {
   // console.log('this is ok:', ok);
   let SQL = `UPDATE boarding SET journal='${awesome}' WHERE id=${ok} RETURNING *;`;
   // let SQL = `INSERT INTO boarding WHERE journal='${awesome}' WHERE id=${ok} RETURNING *;`;
-
+  
   client.query(SQL)
     .then(res.redirect(`/getSavedBoarding?id=${ok}`))
     .catch(err => console.error(err));
@@ -222,8 +223,6 @@ function addNotesBoarding(req, res) {
 function addNotesStamped(req, res) {
   let dope = req.body.journaldata;
   let nice = req.params.loc_id;
-  // console.log('this is dope:', dope);
-  // console.log('this is nice:', nice);
   let SQL = `UPDATE stamped SET journal='${dope}' WHERE id=${nice} RETURNING *;`;
 
   client.query(SQL)
@@ -231,8 +230,11 @@ function addNotesStamped(req, res) {
     .catch(err => console.error(err));
 }
 
-function renderErrorPage(req, res) {
-  res.render('pages/error');
+async function renderErrorPage(req, res) {
+  let message = 'No door here. Please go back and look elsewhere.'
+  let wack = { error: message };
+  console.log(wack);
+ await res.render('./pages/error', wack);
 }
 
 client.connect()

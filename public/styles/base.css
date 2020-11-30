@@ -1,34 +1,62 @@
 
+h1 {
+  font-family: 'Limelight', cursive;
+  font-size: 5vw;
+  color: white;
+}
 
-h1{
-  font-family: 'Limelight', cursive;
-  font-size: xx-large;
-}
-h2{
+h2 {
   font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Limelight', cursive;
-  font-size: large;
+  font-size: 2vw;
 }
-a{
+
+a {
   text-decoration: none;
 }
-nav{
+
+nav {
   font-family: 'Josefin Sans', sans-serif;
   font-family: 'Limelight', cursive;
   font-size: small;
 }
-body{
-width: 18.5vw;
-height: 66.5vh;
-background-color: rgb(156, 100, 100);
-margin: auto;
+
+.homepage-body {
+  position: relative;
+  width: 60%;
+  height: 100vh;
+  /* background: url("/img/home.jpg") #ea7e5d no-repeat center fixed;
+  background-size: contain; */
+  /* background-color: rgb(169, 217, 243); */
+  margin: auto;
+  margin-top: 1%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
-header{
+
+.homepage-header {
+  margin-top: 3vh;
+  margin-bottom: 0.5vh;
+  width: 80%;
+  z-index: 2;
+  text-align: center;
+  color: black;
+  font-weight: bolder;
+}
+
+.homepage-main {
+  z-index: 2;
+  min-height: 5vh;
+  padding: 5%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 
 }
-main{
 
+.homepage-footer {
+  height: 40vh;
 }
-footer{
 
-}

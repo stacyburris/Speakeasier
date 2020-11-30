@@ -1,0 +1,15 @@
+
+.search-field:hover {
+  background-color:orange;
+  border: 2px solid rgba(100, 149, 237);
+  transition: 1s all;
+  }
+
+.search-button:hover {
+/* border: 2px solid orange; */
+/* border-radius: 14px; */
+background-color:orange;
+border: 2px solid rgba(100, 149, 237);
+transition: 1s all;
+}
+
