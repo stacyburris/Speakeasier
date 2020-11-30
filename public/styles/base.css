@@ -1,34 +1,102 @@
-
-
-h1{
+h1 {
   font-family: 'Limelight', cursive;
-  font-size: xx-large;
+  font-size: 5vw;
+  color: white;
+  
+  -webkit-animation: fadein 2s;
 }
-h2{
+
+h2 {
   font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Limelight', cursive;
-  font-size: large;
+  font-size: 2vw;
+  
+  -webkit-animation: fadein 2s;
 }
-a{
+
+a {
   text-decoration: none;
+  color: white;
+  font-size: 20px;
 }
-nav{
+
+nav {
   font-family: 'Josefin Sans', sans-serif;
   font-family: 'Limelight', cursive;
   font-size: small;
+  text-align: center;
 }
+
+.homepage-body {
+  position: relative;
+  width: 60%;
+  height: 100vh;
+  margin: auto;
+  margin-top: 1%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.homepage-header {
+  margin-top: 3vh;
+  margin-bottom: 0.5vh;
+  width: 80%;
+  z-index: 2;
+  text-align: center;
+  color: black;
+  font-weight: bolder;
+}
+
+.homepage-main {
+  z-index: 2;
+  min-height: 5vh;
+  padding: 5%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 body{
   width: 50%;
   height: 115vh;
-  /* background-color: rgb(156, 100, 100); */
   margin: auto;
   }
-header{
-
+  
+.detailsBody{
+  width: 18.5vw;
+  height: 66.5vh;
+  background: url("/img/detailsss.JPG") no-repeat center fixed;
+  background-size: cover;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-main{
 
+.boardingDetailsBody{
+  width: 18.5vw;
+  height: 66.5vh;
+  background: url("/img/detailsBoarding.jpg") no-repeat center fixed;
+  background-size: cover;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-footer{
 
+.stampedDetailsBody{
+  width: 18.5vw;
+  height: 66.5vh;
+  background: url("/img/3.PNG") no-repeat center fixed;
+  background-size: cover;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homepage-footer {
+  height: 40vh;
 }

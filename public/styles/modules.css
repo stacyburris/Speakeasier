@@ -1,0 +1,119 @@
+.search-field:hover {
+  background-color:orange;
+  border: 2px solid rgba(100, 149, 237);
+  transition: 1s all;
+  }
+
+.search-button:hover {
+/* border: 2px solid orange; */
+/* border-radius: 14px; */
+background-color:orange;
+border: 2px solid rgba(100, 149, 237);
+transition: 1s all;
+}
+
+.scroll{
+  height:240px;
+  width:500px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  border: 5px solid white;
+  padding: 5px;
+  border-radius: 15px;
+  -webkit-animation: fadein 2s;
+}
+
+.images{
+  padding-right: 5px;
+}
+
+.mainImage{
+text-align: center;
+margin-top: 50px;
+margin-bottom: 10px;
+-webkit-animation: fadein 2s;
+}
+
+.firstImage{
+  border: 5px inset white;
+  border-radius: 10px;
+}
+
+.detailsDesc{
+  padding: 15px;
+}
+
+.detailsButton{
+  -webkit-animation: fadein 2s;
+  background-color: rgba(21, 27, 27, 0.6);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  color: white;
+  width: 150px;
+  padding: 3%;
+  border: 2px solid white;
+  border-radius: 15px;
+  font-weight: bolder;
+  transition: 2s all;
+}
+
+.formButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 200%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.detBoardingBut{
+  background-color: rgba(21, 27, 27, 0.6);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  color: white;
+  width: 200px;
+  padding: 3%;
+  border: 2px solid white;
+  border-radius: 15px;
+  font-weight: bolder;
+  transition: 2s all;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.noteForm{
+  margin-top: 50px;
+  width: 500px;
+  text-align: center;
+}
+
+ textarea{
+  width: inherit;
+  height: 80px;
+  border: 5px solid rgba(21, 27, 27, 0.1);
+  border-radius: 15px;
+  padding-top: 20px;
+  padding-left: 10px;
+  background-color: rgba(21, 27, 27, 0.6);
+}
+
+.journalStyle{
+  margin-top: 50px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(21, 27, 27, 0.6);
+  border: 5px solid rgba(21, 27, 27, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  -webkit-animation: fadein 2s;
+}
+
+::placeholder{
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-family: 'Josefin Sans', sans-serif;
+}
