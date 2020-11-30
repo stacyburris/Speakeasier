@@ -18,11 +18,11 @@ nav{
   font-size: small;
 }
 body{
-width: 18.5vw;
-height: 66.5vh;
-background-color: rgb(156, 100, 100);
-margin: auto;
-}
+  width: 50%;
+  height: 115vh;
+  /* background-color: rgb(156, 100, 100); */
+  margin: auto;
+  }
 header{
 
 }
