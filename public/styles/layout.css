@@ -1,0 +1,123 @@
+/* This is the background image of index.html */
+.background-image {
+  position: absolute;
+  top: 0;
+  opacity: 0.8;
+  width: 60%;
+  padding: 5%;
+  border: 10px solid orange;
+  border-radius: 15px;
+  background-color: rgba(169, 217, 243, 0.8);
+}
+
+.background-image-authors {
+position: absolute;
+top: 0;
+opacity: 0.6;
+width: 60%;
+padding: 5%;
+border: 10px solid orange;
+border-radius: 15px;
+background-color: rgba(169, 217, 243, 0.8);
+}
+
+.homepage-h2 {
+  margin-top: 0.5vh;
+  padding-top: 1vh;
+  font-size: 2.5vw;
+  color: white;
+  border-top: 6px solid white;
+  border-radius: 15px;
+}
+
+.homepage-form {
+/* border: 2px solid orange; */
+width: 80%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.search-field {
+width: 70%;
+padding: 3%;
+margin-right: 2%;
+border: 2px solid orange;
+border-radius: 14px;
+background-color: rgba(169, 217, 243, 0.8);
+font-family:'Limelight', cursive;
+font-size: 1.5vw;
+font-weight: bolder;
+outline: none;
+transition: 1s all;
+}
+
+::placeholder {
+  color: white;
+  /* text-align: center; */
+  font-size: 1.5vw;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+.search-button {
+outline: none;
+width: 30%;
+padding: 3%;
+border: 2px solid orange;
+border-radius: 15px;
+background-color: rgba(169, 217, 243, 0.8);
+font-family:'Limelight', cursive;
+font-weight: bolder;
+font-size: 1.5vw;
+color: white;
+transition: 1s all;
+}
+
+.authors-scroll {
+  height: 71vh;
+  overflow: scroll;
+}
+
+.authors-bio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 7vh;
+}
+
+.authors-bio h2 {
+  padding: 1vh 0;
+  width: 95%;
+  font-size: 4vw;
+  color: white;
+  text-align: center;
+  background-color: rgba(169, 217, 243, 0.9);
+  border: 2px solid orange;
+  border-radius: 14px;
+}
+
+.image-bio {
+  border: 2px solid white;
+  border-radius: 15px;
+  margin: 2%;
+  width: 41.01722723543888vh;
+}
+
+.author-bullets {
+  padding: 0.5vh 05vh;
+  width: 50%;
+  color: white;
+  /* text-align: center; */
+  background-color: rgba(169, 217, 243, 0.9);
+  border: 2px solid orange;
+  border-radius: 14px;
+  list-style-type: circle;
+}
+.author-bullets li {
+  padding: 0.5vh;
+  font-size: 1vw
+}

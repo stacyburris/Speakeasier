@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title>Speakeasier</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width" initial-scale="1">
-  <link href="styles/styles.css" rel="stylesheet" type="text/css">
-</head>
-
-<main>
-  <form action="/search" method="GET">
-    <label for="search" name="city">
-      <input type="text" name="city" id="">
-      <button type="submit">Click me</button>
-    </label>
-  </form>
-
-</main>
-
+  <head>
+    <title>Speakeasier</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" initial-scale="1">
+    <link href="styles/styles.css" rel="stylesheet" type="text/css">
+  </head>
+  <body class="homepage-body">
+      <img src="img/home.jpg" class="background-image" alt="">
+    <header class="homepage-header">
+      <div>
+        <h1>Speakeasier</h1>
+        <h2 class="homepage-h2">Where have you been?</h2>
+      </div>
+    </header>
+    <main class="homepage-main">
+      <form class="homepage-form" action="/search" method="GET">
+        <!-- <label for="search" name="city"> -->
+          <input class="search-field" type="text" name="city" placeholder="Enter a place." />
+          <button class="search-button" type="submit">Go there.</button>
+        </label>
+      </form>
+    </main>
+    <footer class="homepage-footer"></footer>
+  </body>
 </html>

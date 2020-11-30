@@ -1,3 +1,17 @@
+.search-field:hover {
+  background-color:orange;
+  border: 2px solid rgba(100, 149, 237);
+  transition: 1s all;
+  }
+
+.search-button:hover {
+/* border: 2px solid orange; */
+/* border-radius: 14px; */
+background-color:orange;
+border: 2px solid rgba(100, 149, 237);
+transition: 1s all;
+}
+
 .scroll{
   height:240px;
   width:500px;
@@ -9,17 +23,17 @@
   border: 5px solid white;
   padding: 5px;
   border-radius: 15px;
-
   -webkit-animation: fadein 2s;
 }
+
 .images{
   padding-right: 5px;
 }
+
 .mainImage{
 text-align: center;
 margin-top: 50px;
 margin-bottom: 10px;
-
 -webkit-animation: fadein 2s;
 }
 
@@ -27,13 +41,13 @@ margin-bottom: 10px;
   border: 5px inset white;
   border-radius: 10px;
 }
+
 .detailsDesc{
   padding: 15px;
 }
 
 .detailsButton{
   -webkit-animation: fadein 2s;
-
   background-color: rgba(21, 27, 27, 0.6);
   font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;
@@ -53,7 +67,6 @@ margin-bottom: 10px;
   width: 200%;
   margin-top: 10px;
   margin-bottom: 10px;
-
 }
 
 .detBoardingBut{
@@ -85,7 +98,6 @@ margin-bottom: 10px;
   padding-top: 20px;
   padding-left: 10px;
   background-color: rgba(21, 27, 27, 0.6);
-  
 }
 
 .journalStyle{

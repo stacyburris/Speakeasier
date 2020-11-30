@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <%- include('../components/head.ejs') %>
-</head>
-
-<body>
+  <head>
+    <%- include('../components/head.ejs') %>
+  </head>
+  <body class="homepage-body">
+    <img src="../../public/img/error.jpg" class="background-image" alt="">
   <main>
-    <%= error.message %>
-  </main>
-  <footer>
-
-  </footer>
-</body>
-
+      <h1>
+        <%= error %>
+        <% console.log(error) %>
+      </h1>
+    </main>
+    <footer></footer>
+  </body>
 </html>
