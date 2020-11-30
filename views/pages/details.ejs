@@ -5,7 +5,8 @@
   <%- include('../components/head.ejs') %>
 </head>
 
-<body>
+<body class="detailsBody">
+
   <header>
     <h1><%= render.name %></h1>
 
@@ -14,6 +15,7 @@
     </nav>
 
   </header>
+
   <main>
     <% let imageArray = [] %>
     <% render.photo.forEach(photo => { %>
@@ -21,54 +23,59 @@
     <% }) %>
     <% const special = imageArray[0] %>
 
-    <div class="scroll">
-      <img src="<%= imageArray[0] %>" alt="">
+    <div class="mainImage">
+      <img class="firstImage" src="<%= imageArray[0] %>" alt="">
     </div>
 
-    <h2><%= render.description %></h2>
+    <div class="detailsDesc">
+      <h2><%= render.description %></h2>
+    </div>
 
-    <% imageArray.shift() %>
-    <% imageArray.forEach(photo => { %>
-    <img src="<%= photo %>" alt="">
-    <% }) %>
+    <div class="scroll">
+      <% imageArray.shift() %>
+      <% imageArray.forEach(photo => { %>
+      <img class="images" src="<%= photo %>" alt="">
+      <% }) %>
+    </div>
 
   </main>
-  <form action="/boarding_pass" method="POST">
-    <input type="hidden" name="city_name" value="<%= render.name %>">
-    <input type="hidden" name="city_description" value="<%= render.description %>">
-    <input type="hidden" name="special" value="<%=special%>">
-    <input type="hidden" name="images0" value="<%= imageArray[0]%>">
-    <input type="hidden" name="images1" value="<%= imageArray[1]%>">
-    <input type="hidden" name="images2" value="<%= imageArray[2]%>">
-    <input type="hidden" name="images3" value="<%= imageArray[3]%>">
-    <input type="hidden" name="images4" value="<%= imageArray[4]%>">
-    <input type="hidden" name="images5" value="<%= imageArray[5]%>">
-    <input type="hidden" name="images6" value="<%= imageArray[6]%>">
-    <input type="hidden" name="images7" value="<%= imageArray[7]%>">
-    <input type="hidden" name="images8" value="<%= imageArray[8]%>">
-    <button type="submit">SAVE TO BOARDING PASS</button>
-  </form>
-  <form action="/stamped_pass" method="POST">
-    <input type="hidden" name="city_name" value="<%= render.name %>">
-    <input type="hidden" name="city_description" value="<%= render.description %>">
-    <input type="hidden" name="special" value="<%= special%>">
-    <input type="hidden" name="images0" value="<%= imageArray[0]%>">
-    <input type="hidden" name="images1" value="<%= imageArray[1]%>">
-    <input type="hidden" name="images2" value="<%= imageArray[2]%>">
-    <input type="hidden" name="images3" value="<%= imageArray[3]%>">
-    <input type="hidden" name="images4" value="<%= imageArray[4]%>">
-    <input type="hidden" name="images5" value="<%= imageArray[5]%>">
-    <input type="hidden" name="images6" value="<%= imageArray[6]%>">
-    <input type="hidden" name="images7" value="<%= imageArray[7]%>">
-    <input type="hidden" name="images8" value="<%= imageArray[8]%>">
-    <button type="submit">SAVE TO STAMPED</button>
-  </form>
+  <div class="formButtons">
+    <form action="/boarding_pass" method="POST">
+      <input type="hidden" name="city_name" value="<%= render.name %>">
+      <input type="hidden" name="city_description" value="<%= render.description %>">
+      <input type="hidden" name="special" value="<%=special%>">
+      <input type="hidden" name="images0" value="<%= imageArray[0]%>">
+      <input type="hidden" name="images1" value="<%= imageArray[1]%>">
+      <input type="hidden" name="images2" value="<%= imageArray[2]%>">
+      <input type="hidden" name="images3" value="<%= imageArray[3]%>">
+      <input type="hidden" name="images4" value="<%= imageArray[4]%>">
+      <input type="hidden" name="images5" value="<%= imageArray[5]%>">
+      <input type="hidden" name="images6" value="<%= imageArray[6]%>">
+      <input type="hidden" name="images7" value="<%= imageArray[7]%>">
+      <input type="hidden" name="images8" value="<%= imageArray[8]%>">
+      <button class="detailsButton" type="submit">SAVE TO BOARDING PASS</button>
+    </form>
+    <form action="/stamped_pass" method="POST">
+      <input type="hidden" name="city_name" value="<%= render.name %>">
+      <input type="hidden" name="city_description" value="<%= render.description %>">
+      <input type="hidden" name="special" value="<%= special%>">
+      <input type="hidden" name="images0" value="<%= imageArray[0]%>">
+      <input type="hidden" name="images1" value="<%= imageArray[1]%>">
+      <input type="hidden" name="images2" value="<%= imageArray[2]%>">
+      <input type="hidden" name="images3" value="<%= imageArray[3]%>">
+      <input type="hidden" name="images4" value="<%= imageArray[4]%>">
+      <input type="hidden" name="images5" value="<%= imageArray[5]%>">
+      <input type="hidden" name="images6" value="<%= imageArray[6]%>">
+      <input type="hidden" name="images7" value="<%= imageArray[7]%>">
+      <input type="hidden" name="images8" value="<%= imageArray[8]%>">
+      <button class="detailsButton" type="submit">SAVE TO STAMPED</button>
+    </form>
+  </div>
 
   <!-- <form action="/userInput" method="method-override">
     <textarea type="text">
     <input type="checkbox">
   </form> -->
-
 
 </body>
 
