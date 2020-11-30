@@ -1,16 +1,16 @@
 .boarding-back{
-   background: url('../img/red-door2.png') rgb(228, 188, 188) no-repeat center fixed;
-   overflow: hidden;
-   background-size: 50%;
-   border: 20px solid rgb(172, 154, 154);
-   border-radius: 15px; 
+   background: url('../img/red.PNG') rgb(228, 188, 188) no-repeat center fixed;
+   /* overflow: hidden; */
+   background-size: cover;
+   /* border: 20px solid rgb(172, 154, 154); */
+   /* border-radius: 15px;  */
    box-sizing: border-box;
    }
 
  #boarding-header{
   font-family: 'Limelight', cursive;
   font-size: 5vw;
-  color: rgba(36, 30, 30, 0.925);
+  color: white;
   border-radius: 10px;
   padding: 15px 35px;
 } 
@@ -31,12 +31,12 @@
   width: 30%;
 } 
 
-.navers > a{
+.navers a{
  margin: 5px;
  text-align: center;
  border-radius: 10px;
 padding: 10px;
-width: 75px;
+width: 20vw;
 color:rgba(36, 30, 30, 0.925);
 background-color: whitesmoke;
 font-family: 'Josefin Sans', sans-serif;

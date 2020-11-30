@@ -26,7 +26,7 @@ transition: 1s all;
   -webkit-animation: fadein 2s;
 }
 
-.images{
+.rikoimages{
   padding-right: 5px;
 }
 
@@ -44,6 +44,9 @@ margin-bottom: 10px;
 
 .detailsDesc{
   padding: 15px;
+  color: white;
+  background-color: rgba(21, 27, 27, 0.6);
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .detailsButton{
@@ -116,4 +119,14 @@ margin-bottom: 10px;
   color: rgb(255, 255, 255);
   font-size: 15px;
   font-family: 'Josefin Sans', sans-serif;
+}
+
+.textArea{
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.textArea:focus::placeholder{
+  color: transparent;
 }
