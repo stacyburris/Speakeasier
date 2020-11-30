@@ -3,3 +3,7 @@
 @import "layout.css";
 @import "modules.css";
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Limelight&display=swap');
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
