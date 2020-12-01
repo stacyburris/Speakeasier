@@ -4,7 +4,7 @@
 
 **Version**:
 
-1.0.0 [Releast Date]
+1.0.0 [01DEC2020]
 
 ## Overview
 
@@ -24,7 +24,14 @@
 + [Heroku-deployed site](https://speakeasier.herokuapp.com/)
 
 ## Credits and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
++ Google Knowledge API
++ Google Places API
++ Unsplash
++ Brian Nations
++ Chance & Skyler
++ Brai, Nicco, Ron, Bade and Cait
+
 
 
 ![image](relationship.png)
