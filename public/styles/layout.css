@@ -3,11 +3,13 @@
    background: url('../img/pink-door\ \(2\).jpg') rgb(228, 188, 188) no-repeat center fixed;
    background-size: cover;
    box-sizing: border-box;
+   overflow: hidden;
 }
 .stamped-back {
   background: url('../img/cactus-green-door\ \(2\).jpg') rgb(29, 85, 66) no-repeat center fixed;
   background-size: cover;
   box-sizing: border-box;
+  overflow: hidden;
 }
  
  #boarding-header {
@@ -27,12 +29,19 @@
   padding-top: 10px;
 }
 
+.headerFixed{
+  position: fixed;
+}
+
 .navers {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   /* width: 25%; */
   border-top: 6px solid white;
+  margin-top: 40px;
+  /* padding-top: 5px; */
+  margin-bottom: 15px;
   /* padding-top: 5px; */
   width: 90%;
 } 
@@ -43,25 +52,37 @@
   font-family: 'Limelight', cursive;
 }
 
+.navers a:hover{
+  transform: scale(1.1);
+}
+
+
+
 .container {
    overflow: scroll;
    height: 100vh;
    width: 85%; 
    padding: 15px;
    margin: auto;
+   position: fixed;
 }
 
 .container::-webkit-scrollbar {
   width: 0px; 
   background: transparent; 
+  overscroll-behavior: contain;
 }
 
 .place-name {
   display: flex;
   flex-wrap: wrap;
-  margin: 5px 0px 5px 0px;
+  margin: 5px 0px 5px 35px;
 }
-
+.stamp-name {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px 0px 25px 65px;
+}
 
 .images-role {
   border-radius: 5px;
@@ -78,12 +99,12 @@
 }
 
 .images { 
-   border: 4px solid rgb(206, 194, 194);
+   /* border: 4px solid rgb(206, 194, 194); */
    width: 15vw;
-   border-radius: 8px;
+   border-radius: 4px;
 }
 
-.images:hover. {
+.images:hover{
   transition: 1s all;
   transform: scale(1.1);
 }
@@ -284,11 +305,11 @@
   font-size: 1.2vw
 }
 
-.homepage-footer a {
+/* .homepage-footer a {
   color: white;
   font-family: 'Limelight', cursive;
   font-size: 1.5vw;
-}
+} */
 
 .error-footer a {
   color: white;

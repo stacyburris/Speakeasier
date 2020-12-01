@@ -122,7 +122,7 @@ body{
   
 .detailsBody{
   width: 18.5vw;
-  height: 66.5vh;
+  height: 170vh;
   background: url("/img/detailsss.JPG") no-repeat center fixed;
   background-size: cover;
   margin: auto;
@@ -146,10 +146,11 @@ body{
 
 .stampedDetailsBody{
   width: 18.5vw;
-  height: 66.5vh;
+  height: 100vh;
   background: url("/img/yellow.JPG") no-repeat center fixed;
   background-size: cover;
   margin: auto;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
