@@ -44,10 +44,9 @@ app.get('/getSavedStamped', getSavedStamped);
 app.get('*', renderErrorPage);
 
 function getCity(req, res) {
-  if (req.query.city === 'speakeasier') {
-    res.sendFile('./public/about-us.html', { root: __dirname })
+  if (req.query.city === 'speakeasier' || req.query.city === 'Speakeasier' || req.query.city === 'SPEAKEASIER') {
+    res.sendFile('./public/about-us.html', {root: __dirname })
   } else {
-
     let obj = {};
     let city = req.query.city;
     let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
@@ -231,10 +230,9 @@ function addNotesStamped(req, res) {
 }
 
 async function renderErrorPage(req, res) {
-  let message = 'No door here. Please go back and look elsewhere.'
+  let message = 'No door here. Please look elsewhere.'
   let wack = { error: message };
-  console.log(wack);
-  await res.render('./pages/error', wack);
+ await res.render('./pages/error', wack);
 }
 
 client.connect()

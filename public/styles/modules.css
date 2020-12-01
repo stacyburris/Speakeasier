@@ -1,15 +1,33 @@
 .search-field:hover {
-  background-color:orange;
-  border: 2px solid rgba(100, 149, 237);
+  background-color:rgba(255, 165, 0, 0.8);
+  border: 2px solid #6495ed;
   transition: 1s all;
   }
 
 .search-button:hover {
-/* border: 2px solid orange; */
-/* border-radius: 14px; */
-background-color:orange;
-border: 2px solid rgba(100, 149, 237);
-transition: 1s all;
+  background-color:rgba(255, 165, 0, 0.8);
+  border: 2px solid rgba(100, 149, 237) ;
+  transition: 1s all;
+}
+
+h1 > a:hover {
+  color: rgb(236, 204, 47);
+}
+
+.error-home-link:hover {
+  color:rgba(255, 165, 0);
+}
+
+.error-footer a:hover {
+  transform: scale(1.1);
+}
+
+.homepage-footer a:hover {
+  transform: scale(1.1);
+}
+
+.about-us-main {
+  overflow: scroll;
 }
 
 .scroll{
@@ -115,7 +133,7 @@ margin-bottom: 10px;
   text-align: center;
 }
 
- textarea{
+textarea {
   width: inherit;
   height: 80px;
   border: 5px solid rgba(21, 27, 27, 0.1);
