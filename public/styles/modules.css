@@ -38,9 +38,7 @@ h1 > a:hover {
   flex-direction: row;
   margin-top: 50px;
   margin-bottom: 10px;
-  /* border: 5px solid white; */
   padding: 25px;
-  /* border-radius: 15px; */
   -webkit-animation: fadein 2s;
 }
 
@@ -70,7 +68,6 @@ margin-bottom: 10px;
   color: white;
   font-family: 'Josefin Sans', sans-serif;
   margin-top: 50px;
-  /* width: inherit; */
 }
 
 .detailsButton{
@@ -98,7 +95,6 @@ margin-bottom: 10px;
   flex-direction: row;
   justify-content: space-between;
   width: 200%;
-  /* margin-top: 7px; */
   margin-bottom: 40px;
   padding-bottom: 10px;
 }

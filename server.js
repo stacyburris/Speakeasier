@@ -45,7 +45,7 @@ app.get('*', renderErrorPage);
 
 function getCity(req, res) {
   if (req.query.city === 'speakeasier' || req.query.city === 'Speakeasier' || req.query.city === 'SPEAKEASIER') {
-    res.sendFile('./public/about-us.html', {root: __dirname })
+    res.sendFile('./public/about-us.html', { root: __dirname })
   } else {
     let obj = {};
     let city = req.query.city;
@@ -63,12 +63,11 @@ function getCity(req, res) {
         obj.description = array[0].detailedDescription.articleBody;
         obj.name = array[0].name;
       })
-        .then(() => {
+      .then(() => {
         let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
         superagent.get(urlPlaceId)
           .then(data => {
             let pocket = data.body.candidates;
-            // console.log('DATA.BODY:', data.body);
             let photoRefs = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pocket[0].place_id}&key=${GOOGLE_API_KEY}`;
 
             ////////////////////////// Country Info . . . on hold. //////////////////////////////////
@@ -92,7 +91,6 @@ function getCity(req, res) {
 
             superagent.get(photoRefs)
               .then(data => {
-                // console.log('PLACE-ID:', data);
                 let photoReferenceArray = data.body.result.photos;
                 if (photoReferenceArray) {
                   return photoReferenceArray.map(photos => photos.photo_reference)
@@ -100,7 +98,6 @@ function getCity(req, res) {
                   res.redirect('/pages/error');
                 }
               })
-              // .catch(res.redirect('/pages/error'))
               .then(data => {
                 let array = data.map(photoArray => {
                   let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
@@ -118,16 +115,15 @@ function getCity(req, res) {
                     obj.photo = potatoes;
                     res.render('./pages/details', { render: obj });
                   })
-                  // .catch(res.redirect('/pages/error'));
-                  })
               })
           })
-          .catch(err => {
-            console.log('ERROR', err);
-            res.render('./pages/error', err);
-            
-        })
-      }
+      })
+      .catch(err => {
+        console.log('ERROR', err);
+        res.render('./pages/error', err);
+
+      })
+  }
 
 }
 
@@ -218,10 +214,7 @@ function getSavedStamped(req, res) {
 function addNotesBoarding(req, res) {
   let awesome = req.body.journaldata;
   let ok = req.params.loc_id;
-  // console.log('this is awesome:', awesome);
-  // console.log('this is ok:', ok);
   let SQL = `UPDATE boarding SET journal='${awesome}' WHERE id=${ok} RETURNING *;`;
-  // let SQL = `INSERT INTO boarding WHERE journal='${awesome}' WHERE id=${ok} RETURNING *;`;
 
   client.query(SQL)
     .then(res.redirect(`/getSavedBoarding?id=${ok}`))
@@ -251,6 +244,3 @@ client.connect()
     })
   })
 client.on('error', err => console.err(err));
-
-
-
