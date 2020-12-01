@@ -57,13 +57,13 @@ function getCity(req, res) {
         data.body.itemListElement.map(results => {
           array.push(results.result);
         })
-        if (!array[0] || !array[0].detailedDescription.articleBody) {
-          res.render('./pages/error', wack);
+        if (!array[0] || !array[0].detailedDescription.articleBody || !array[0].detailedDescription) {
+          res.redirect('/pages/error');
         }
         obj.description = array[0].detailedDescription.articleBody;
         obj.name = array[0].name;
       })
-      .then(() => {
+        .then(() => {
         let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
         superagent.get(urlPlaceId)
           .then(data => {
@@ -94,8 +94,13 @@ function getCity(req, res) {
               .then(data => {
                 // console.log('PLACE-ID:', data);
                 let photoReferenceArray = data.body.result.photos;
-                return photoReferenceArray.map(photos => photos.photo_reference)
+                if (photoReferenceArray) {
+                  return photoReferenceArray.map(photos => photos.photo_reference)
+                } else {
+                  res.redirect('/pages/error');
+                }
               })
+              // .catch(res.redirect('/pages/error'))
               .then(data => {
                 let array = data.map(photoArray => {
                   let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
@@ -113,13 +118,17 @@ function getCity(req, res) {
                     obj.photo = potatoes;
                     res.render('./pages/details', { render: obj });
                   })
-                  .catch(err => {
-                    res.render('./pages/error', err);
+                  // .catch(res.redirect('/pages/error'));
                   })
               })
           })
-      })
-  }
+          .catch(err => {
+            console.log('ERROR', err);
+            res.render('./pages/error', err);
+            
+        })
+      }
+
 }
 
 function saveBoarding(req, res) {
@@ -229,10 +238,10 @@ function addNotesStamped(req, res) {
     .catch(err => console.error(err));
 }
 
-async function renderErrorPage(req, res) {
+function renderErrorPage(req, res) {
   let message = 'No door here. Please look elsewhere.'
   let wack = { error: message };
- await res.render('./pages/error', wack);
+  res.render('./pages/error', wack);
 }
 
 client.connect()
