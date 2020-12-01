@@ -41,13 +41,13 @@ a {
 .aDetails{
   font-family: 'Limelight', cursive;
   color: white;
-  font-size: 20px;
+  font-size: 1.5vw;
 }
 
 .aDetailsS{
   text-decoration: underline;
   color: white;
-  font-size: 20px;
+  font-size: 1.5vw;
 }
 
 .aDetails:hover{

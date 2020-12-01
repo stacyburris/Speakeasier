@@ -41,6 +41,10 @@ h1 > a:hover {
   padding: 25px;
   -webkit-animation: fadein 2s;
 }
+.scroll::-webkit-scrollbar {
+  width: 0px; 
+  background: transparent; 
+}
 
 .rikoimages{
   padding-right: 30px;
@@ -151,14 +155,15 @@ textarea {
 
 ::placeholder{
   color: rgb(255, 255, 255);
-  font-size: 15px;
+  font-size: 20px;
   font-family: 'Josefin Sans', sans-serif;
 }
 
 .textArea{
   color: rgb(255, 255, 255);
-  font-size: 15px;
   font-family: 'Josefin Sans', sans-serif;
+  font-size: 25px;
+ 
 }
 
 .textArea:focus::placeholder{
