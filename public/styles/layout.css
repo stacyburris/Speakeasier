@@ -1,0 +1,326 @@
+
+.boarding-back {
+   background: url('../img/pink-door\ \(2\).jpg') rgb(228, 188, 188) no-repeat center fixed;
+   background-size: cover;
+   box-sizing: border-box;
+   overflow: hidden;
+}
+.stamped-back {
+  background: url('../img/cactus-green-door\ \(2\).jpg') rgb(29, 85, 66) no-repeat center fixed;
+  background-size: cover;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+ 
+ #boarding-header {
+  font-family: 'Limelight', cursive;
+  font-size: 4.2vw;
+  color: white;
+  border-radius: 10px;
+  padding: 20px 35px 5px 35px;
+} 
+
+.header-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.headerFixed{
+  position: fixed;
+}
+
+.navers {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-top: 6px solid white;
+  margin-top: 40px;
+  margin-left: 20px;
+  margin-bottom: 15px;
+  width: 90%;
+} 
+
+.navers a {
+  padding: 30px 20px 0px 30px;
+  color:white;
+  font-family: 'Limelight', cursive;
+}
+
+.navers a:hover{
+  transform: scale(1.1);
+}
+
+
+
+.container {
+   overflow: scroll;
+   height: 100vh;
+   width: 85%; 
+   padding: 15px;
+   margin: auto;
+   margin-top: 30px;
+   position: fixed;
+}
+
+.container::-webkit-scrollbar {
+  width: 0px; 
+  background: transparent; 
+  overscroll-behavior: contain;
+}
+
+.place-name {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px 0px 5px 75px;
+}
+.stamp-name {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px 0px 25px 130px;
+}
+
+.images-role {
+  border-radius: 5px;
+  padding-left: 1vw;
+  padding-top: 1vh;
+  padding-bottom: 2vh;
+}
+
+.images-role-stamp {
+  border-radius: 5px;
+  padding-bottom: 2vh;
+  margin-bottom: 3vh;
+  margin-top: 3vh;
+}
+
+.images {
+   width: 15vw;
+   border-radius: 4px;
+}
+
+.images:hover {
+  transition: 1s all;
+  transform: scale(1.1);
+}
+
+.three-buttons{
+  margin-left: 3vw;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hugs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.background-image {
+  border: 10px solid orange;
+  border-radius: 15px;
+  background-color: rgba(169, 217, 243, 0.8);
+}
+
+.background-image-authors {
+  position: absolute;
+  top: 0;
+  opacity: 0.8;
+  width: 60%;
+  padding: 5%;
+  border: 10px solid rgb(78, 156, 78);
+  border-radius: 15px;
+  background-color: rgb(236, 204, 47);
+}
+
+.background-image-error {
+  position: absolute;
+  top: 0;
+  opacity: 0.8;
+  height: 90%;
+  padding: 5%;
+  border: 10px solid orange;
+  border-radius: 15px;
+  background-color: rgba(169, 217, 243, 0.8);
+}
+
+.homepage-h2 {
+  margin-top: 0.5vh;
+  padding-top: 1vh;
+  font-size: 2vw;
+  color: white;
+  border-top: 6px solid white;
+  border-radius: 15px;
+}
+
+.error-h2 {
+  margin-top: 0.5vh;
+  padding-top: 1vh;
+  font-size: 1.5vw;
+  color: white;
+  border-top: 6px solid white;
+  border-radius: 15px;
+}
+
+.homepage-form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-field {
+  width: 70%;
+  padding: 3%;
+  margin-right: 2%;
+  border: 2px solid orange;
+  border-radius: 14px;
+  background-color: rgba(169, 217, 243, 0.8);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.5vw;
+  color: white;
+  font-weight: bolder;
+  outline: none;
+  transition: 1s all;
+  text-align: center;
+}
+
+.search-field::placeholder {
+  color: white;
+  font-size: 1.5vw;
+}
+
+.search-field:focus::placeholder {
+  color: transparent;
+}
+
+.search-button {
+  outline: none;
+  width: 30%;
+  padding: 3%;
+  border: 2px solid rgba(255, 165, 0);
+  border-radius: 15px;
+  background-color: rgba(169, 217, 243, 0.8) ;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: bolder;
+  font-size: 1.5vw;
+  color: white;
+  transition: 1s all;
+  text-align: center;
+}
+
+.authors-bio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1vh;
+  margin-bottom: 30vh;
+}
+
+.loc-name {
+  outline: none;
+  font-family: 'Limelight', cursive;
+  font-size: 1.6vw;
+  padding: 5%;
+  border: 2px solid rgb(155, 150, 150);
+  border-radius: 10px;
+  background-color: rgb(206, 194, 194);
+  font-weight: bolder;
+  color:rgb(66, 61, 61);
+  transition: 1s all;
+  width: 19vw;
+}
+
+.loc-name:hover {
+  background-color:rgb(228, 220, 199);
+  border: 2px solid rgba(252, 242, 212);
+  transition: 1s all;
+  cursor: pointer;
+}
+
+.back-buttons {
+  outline: none;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .8vw;
+  padding: 3%;
+  border: 2px solid  rgb(155, 150, 150);
+  border-radius: 10px;
+  background-color: rgb(206, 194, 194);
+  color:rgb(53, 51, 51);
+  margin: 5%;
+  transition: 1s all;
+}
+
+.back-buttons:hover {
+  background-color:rgb(228, 220, 199);
+  border: 2px solid rgba(252, 242, 212);
+  transition: 1s all;
+  cursor: pointer;
+}
+ 
+.surrounder {
+  display: flex;
+}
+
+.authors-bio h2 {
+  padding-top: 1vh;
+  width: 80%;
+  font-size: 2vw;
+  color: white;
+  text-align: center;
+  background-color: rgba(169, 217, 243, 0.95);
+  border: 2px solid rgb(236, 204, 47);
+  border-radius: 14px;
+}
+
+.image-bio {
+  border: 2px solid white;
+  border-radius: 15px;
+  margin: 2%;
+  width: 41.01722723543888vh;
+  -webkit-animation: fadein 2s;
+}
+
+.author-bullets {
+  padding: 0.5vh 0.5vh;
+  width: 60%;
+  color: white;
+  background-color: rgba(169, 217, 243, 0.95);
+  border: 2px solid rgb(236, 204, 47);
+  border-radius: 14px;
+  list-style-type: circle;
+  -webkit-animation: fadein 2s;
+}
+
+.author-bullets li {
+  padding: 0.5vh;
+  font-size: 1vw
+}
+
+.homepage-footer a {
+  border-top: 6px solid white;
+  border-radius: 14px;
+  padding-top: 1vh;
+  color: white;
+  font-family: 'Limelight', cursive;
+  font-size: 1.5vw;
+  -webkit-animation: fadein 2s;
+}
+
+.error-footer a {
+  color: white;
+  border-top: 6px solid white;
+  border-radius: 14px;
+  padding-top: 1vh;
+  -webkit-animation: fadein 2s;
+  font-family: 'Limelight', cursive;
+  font-size: 1.5vw;
+}

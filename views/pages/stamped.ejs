@@ -1,21 +1,46 @@
-<body>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../components/head.ejs') %>
+</head>
+
+<body class="stamped-back">
+  <header class="header-box">
+    <section>
+      <h2 id="boarding-header">STAMPED</h2>
+    </section>
+    <section class="navers">
+      <a id="home" href="/">HOME</a>
+      <a id="stamp" href="/boarding">BOARDING</a>
+    </section>
+  </header>
   <main>
-    <ul>
-      <% stampedData.forEach(location=>{%>
-      <li class="" data-id="<%= location.id %>">
-        <form action="/getSavedStamped" method="GET">
-          <input type="hidden" name="id" value="<%=location.id %>"><br>
-          <input type="submit" value="<%= location.city_name %>">
-        </form>
+    <section class="container">
+      <ul>
+        <% stampedData.forEach(location=>{%>
+        <li class="stamp-name" data-id="<%= location.id %>">
+          <div class="image-role-stamp">
+            <img class="images" src="<%= location.special %>">
+          </div>
+          <div class="three-buttons">
+            <div class="hugs">
+              <form action="/getSavedStamped" method="GET">
+                <input type="hidden" name="id" value="<%=location.id %>"><br>
+                <input class="loc-name" type="submit" value="<%= location.city_name %>">
+              </form>
+              <div class="surrounder">
+                <form action="/deleteStamped/<%=location.id%>?_method=DELETE" method="POST">
+                  <button class="back-buttons" type="submit">REMOVE THIS LOCATION</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <%})%>
 
-        <img src="<%= location.special %>">
-
-
-        <form action="/deleteStamped/<%=location.id%>?_method=DELETE" method="POST">
-          <button type="submit">REMOVE THIS LOCATION</button>
-        </form>
-        <%})%>
-
-    </ul>
+      </ul>
+    </section>
   </main>
 </body>
+
+</html>

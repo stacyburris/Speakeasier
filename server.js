@@ -41,82 +41,89 @@ app.get('/search', getCity);
 app.get('/getSavedBoarding', getSavedBoarding);
 app.get('/getSavedStamped', getSavedStamped);
 
+app.get('*', renderErrorPage);
+
 function getCity(req, res) {
-  // console.log('FROM SAVED PAGE:', req.query)
-  let obj = {};
-  let city = req.query.city;
-  let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
+  if (req.query.city === 'speakeasier' || req.query.city === 'Speakeasier' || req.query.city === 'SPEAKEASIER') {
+    res.sendFile('./public/about-us.html', { root: __dirname })
+  } else {
+    let obj = {};
+    let city = req.query.city;
+    let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
 
-
-  superagent.get(googleKn)
-    .then(data => {
-      // console.log('GOOGLE KN:', data);
-      let array = [];
-      data.body.itemListElement.map(results => {
-        array.push(results.result);
-      })
-      if (!array[0] || !array[0].detailedDescription.articleBody) {
-        res.render('./pages/error', { error: { message: 'Page Not Found' } });
-      }
-      obj.description = array[0].detailedDescription.articleBody;
-      obj.name = array[0].name;
-    })
-    .then(() => {
-      let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
-      superagent.get(urlPlaceId)
-        .then(data => {
-          let pocket = data.body.candidates;
-          // console.log('DATA.BODY:', data.body);
-          let photoRefs = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pocket[0].place_id}&key=${GOOGLE_API_KEY}`;
-
-          ////////////////////////// Country Info . . . on hold. //////////////////////////////////
-          // superagent.get(photoRefs)
-          //   .then(data => {
-          //     let formattedAddress = data.body.result.formatted_address;
-          //     console.log('Formatted Address:', formattedAddress);
-          //     let countryURL = 'https://restcountries.eu/rest/v2/all';
-
-          //     superagent.get(countryURL)
-          //       .then(carrot => {
-          //         let body = carrot.body;
-          //         body.forEach(value => {
-          //         })
-          //       console.log(body[1].name);
-          //         // for (let i=0; i<carrot.length; i++) {
-          //         //     if (carrot[i].name = formattedAddress) {
-          //         })
-          //       })
-          ////////////////////////// Country Info . . . on hold. //////////////////////////////////
-
-          superagent.get(photoRefs)
-            .then(data => {
-              // console.log('PLACE-ID:', data);
-              let photoReferenceArray = data.body.result.photos;
-              return photoReferenceArray.map(photos => photos.photo_reference)
-            })
-            .then(data => {
-              let array = data.map(photoArray => {
-                let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=300&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
-                return url;
-              })
-              return array;
-            })
-            .then(banana => {
-              let photoArray = [];
-              banana.forEach(apple => {
-                photoArray.push(superagent.get(apple));
-              })
-              Promise.all(photoArray)
-                .then(potatoes => {
-                  obj.photo = potatoes;
-                  res.render('./pages/details', { render: obj });
-                })
-                .catch(err => {
-                  res.render('./pages/error', err);
-                })
-            })
+    superagent.get(googleKn)
+      .then(data => {
+        let array = [];
+        data.body.itemListElement.map(results => {
+          array.push(results.result);
         })
-    })
+        if (!array[0] || !array[0].detailedDescription.articleBody || !array[0].detailedDescription) {
+          res.redirect('/pages/error');
+        }
+        obj.description = array[0].detailedDescription.articleBody;
+        obj.name = array[0].name;
+      })
+      .then(() => {
+        let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
+        superagent.get(urlPlaceId)
+          .then(data => {
+            let pocket = data.body.candidates;
+            let photoRefs = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pocket[0].place_id}&key=${GOOGLE_API_KEY}`;
+
+            ////////////////////////// Country Info . . . on hold. //////////////////////////////////
+            // superagent.get(photoRefs)
+            //   .then(data => {
+            //     let formattedAddress = data.body.result.formatted_address;
+            //     console.log('Formatted Address:', formattedAddress);
+            //     let countryURL = 'https://restcountries.eu/rest/v2/all';
+
+            //     superagent.get(countryURL)
+            //       .then(carrot => {
+            //         let body = carrot.body;
+            //         body.forEach(value => {
+            //         })
+            //       console.log(body[1].name);
+            //         // for (let i=0; i<carrot.length; i++) {
+            //         //     if (carrot[i].name = formattedAddress) {
+            //         })
+            //       })
+            ////////////////////////// Country Info . . . on hold. //////////////////////////////////
+
+            superagent.get(photoRefs)
+              .then(data => {
+                let photoReferenceArray = data.body.result.photos;
+                if (photoReferenceArray) {
+                  return photoReferenceArray.map(photos => photos.photo_reference)
+                } else {
+                  res.redirect('/pages/error');
+                }
+              })
+              .then(data => {
+                let array = data.map(photoArray => {
+                  let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
+                  return url;
+                })
+                return array;
+              })
+              .then(banana => {
+                let photoArray = [];
+                banana.forEach(apple => {
+                  photoArray.push(superagent.get(apple));
+                })
+                Promise.all(photoArray)
+                  .then(potatoes => {
+                    obj.photo = potatoes;
+                    res.render('./pages/details', { render: obj });
+                  })
+              })
+          })
+      })
+      .catch(err => {
+        console.log('ERROR', err);
+        res.render('./pages/error', err);
+
+      })
+  }
 
 }
 
@@ -174,7 +181,7 @@ function deleteBoarding(req, res) {
 }
 
 function moveToStamped(req, res) {
-  let SQL = 'INSERT INTO stamped (city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8) SELECT city_name, city_description, special, images0, images1, images2, images3, images4, images5, images6, images7, images8 FROM boarding WHERE id=$1;';
+  let SQL = 'INSERT INTO stamped (city_name, city_description, special, journal, images0, images1, images2, images3, images4, images5, images6, images7, images8) SELECT city_name, city_description, special, journal, images0, images1, images2, images3, images4, images5, images6, images7, images8 FROM boarding WHERE id=$1;';
   let values = [req.params.location_id];
 
   client.query(SQL, values)
@@ -207,10 +214,7 @@ function getSavedStamped(req, res) {
 function addNotesBoarding(req, res) {
   let awesome = req.body.journaldata;
   let ok = req.params.loc_id;
-  // console.log('this is awesome:', awesome);
-  // console.log('this is ok:', ok);
   let SQL = `UPDATE boarding SET journal='${awesome}' WHERE id=${ok} RETURNING *;`;
-  // let SQL = `INSERT INTO boarding WHERE journal='${awesome}' WHERE id=${ok} RETURNING *;`;
 
   client.query(SQL)
     .then(res.redirect(`/getSavedBoarding?id=${ok}`))
@@ -220,8 +224,6 @@ function addNotesBoarding(req, res) {
 function addNotesStamped(req, res) {
   let dope = req.body.journaldata;
   let nice = req.params.loc_id;
-  // console.log('this is dope:', dope);
-  // console.log('this is nice:', nice);
   let SQL = `UPDATE stamped SET journal='${dope}' WHERE id=${nice} RETURNING *;`;
 
   client.query(SQL)
@@ -230,7 +232,9 @@ function addNotesStamped(req, res) {
 }
 
 function renderErrorPage(req, res) {
-  res.render('pages/error');
+  let message = 'No door here. Please look elsewhere.'
+  let wack = { error: message };
+  res.render('./pages/error', wack);
 }
 
 client.connect()
@@ -240,6 +244,3 @@ client.connect()
     })
   })
 client.on('error', err => console.err(err));
-
-
-

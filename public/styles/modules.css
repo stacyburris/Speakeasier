@@ -1,0 +1,166 @@
+.search-field:hover {
+  background-color:rgba(255, 165, 0, 0.8);
+  border: 2px solid #6495ed;
+  transition: 1s all;
+  }
+
+.search-button:hover {
+  background-color:rgba(255, 165, 0, 0.8);
+  border: 2px solid rgba(100, 149, 237) ;
+  transition: 1s all;
+}
+
+h1 > a:hover {
+  color: rgb(236, 204, 47);
+}
+
+.error-home-link:hover {
+  color:rgba(255, 165, 0);
+}
+
+.error-footer a:hover {
+  transform: scale(1.1);
+}
+
+.homepage-footer a:hover {
+  transform: scale(1.1);
+}
+
+.about-us-main {
+  overflow: scroll;
+}
+
+.scroll{
+  height:450px;
+  width:750px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  padding: 25px;
+  -webkit-animation: fadein 2s;
+}
+
+.rikoimages{
+  padding-right: 30px;
+}
+
+.rikoimages:hover{
+  transition: 1s all;
+  transform: scale(1.1);
+}
+
+.mainImage{
+text-align: center;
+margin-top: 50px;
+margin-bottom: 10px;
+-webkit-animation: fadein 2s;
+}
+
+.firstImage:hover{
+  transition: 1s all;
+  transform: scale(1.1);
+}
+
+.detailsDesc{
+  padding: 15px;
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  margin-top: 50px;
+}
+
+.detailsButton{
+  -webkit-animation: fadein 2s;
+  background-color: rgba(38, 47, 47, 0.6);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  color: white;
+  width: 150px;
+  padding: 3%;
+  border: 2px solid white;
+  border-radius: 15px;
+  font-weight: bolder;
+  transition: 2s all;
+}
+
+.detailsButton:hover{
+  background-color: rgb(0, 0, 0);
+  transition: 1s all;
+  transform: scale(1.1);
+}
+
+.formButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 200%;
+  margin-bottom: 40px;
+  padding-bottom: 10px;
+}
+
+.detBoardingBut{
+  background-color: rgba(21, 27, 27, 0.6);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  color: white;
+  width: 200px;
+  padding: 3%;
+  border: 2px solid white;
+  border-radius: 15px;
+  font-weight: bolder;
+  transition: 2s all;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.detBoardingBut:hover{
+  background-color: rgb(0, 0, 0);
+  transition: 1s all;
+  transform: scale(1.1);
+}
+
+.noteForm{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 785px;
+  text-align: center;
+}
+
+textarea {
+  width: inherit;
+  height: 80px;
+  border: 5px solid rgba(21, 27, 27, 0.1);
+  border-radius: 15px;
+  padding-top: 20px;
+  padding-left: 10px;
+  background-color: rgba(21, 27, 27, 0.6);
+}
+
+.journalStyle{
+  margin-top: 50px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(21, 27, 27, 0.6);
+  border: 5px solid rgba(21, 27, 27, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  -webkit-animation: fadein 2s;
+}
+
+::placeholder{
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.textArea{
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.textArea:focus::placeholder{
+  color: transparent;
+}

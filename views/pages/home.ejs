@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title></title>
-</head>
-<main>
-  <form action="/search" method="GET">
-    <label for="search" name="city">
-      <input type="text" name="city" id="">
-      <button type="submit">Click me</button>
-    </label>
-  </form>
-
-</main>
-
+  <head>
+    <%- include('../components/head.ejs') %>
+    <link href="../styles/styles.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Speakeasier</h1>
+        <h2>Where have you been?</h2>
+      </div>
+    </header>
+    <main class="homepage">
+      <form action="/search" method="GET">
+        <label for="search" name="city">
+          <input type="text" name="city" id="">
+          <button type="submit">Go!</button>
+        </label>
+      </form>
+    </main>
+    <footer></footer>
+  </body>
 </html>

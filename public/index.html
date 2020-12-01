@@ -2,16 +2,31 @@
 <html>
 
 <head>
-  <title></title>
+  <title>Speakeasier</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" initial-scale="1">
+  <link href="styles/styles.css" rel="stylesheet" type="text/css">
 </head>
-<main>
-  <form action="/search" method="GET">
-    <label for="search" name="city">
-      <input type="text" name="city" id="">
-      <button type="submit">Click me</button>
-    </label>
-  </form>
 
-</main>
+<body class="homepage-body">
+  <header class="homepage-header">
+    <div>
+      <h1>Speakeasier</h1>
+      <h2 class="homepage-h2">Where have you been?</h2>
+    </div>
+  </header>
+  <main class="homepage-main">
+    <form class="homepage-form" action="/search" method="GET">
+      <input class="search-field" type="text" name="city" placeholder="Enter a place." />
+      <button class="search-button" type="submit">Go there.</button>
+    </form>
+  </main>
+  <footer class="homepage-footer">
+    <div class="homepage-footer-div">
+      <a href="/boarding">Boarding</a>
+      <a href="/stamped">Stamped</a>
+    </div>
+  </footer>
+</body>
 
 </html>

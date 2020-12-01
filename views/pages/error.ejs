@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title>Error page</title>
-</head>
-
-<body>
-  <main>
-    <%= error.message %>
-  </main>
-  <footer>
-
-  </footer>
-</body>
-
+  <head>
+    <title>Speakeasier</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" initial-scale="1">
+    <link href="../../styles/styles.css" rel="stylesheet" type="text/css">
+  </head>
+  <body class="error-body">
+    <img src="../../img/error (1).jpeg" class="background-image-error" alt="">
+    <header class="homepage-header">
+      <div>
+        <h1><a href="/" class="error-home-link">Speakeasier</a></h1>
+        <h2 class="error-h2"><%= error %></h2>
+      </div>
+    </header>
+    <main class="homepage-main">
+    </main>
+    <footer class="error-footer">
+      <div class="error-footer-div">
+        <a href="/boarding">Boarding</a>
+        <a href="/stamped">Stamped</a>
+      </div>
+    </footer>
+  </body>
 </html>
