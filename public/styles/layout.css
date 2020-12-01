@@ -58,7 +58,7 @@
 
 .container {
    overflow: scroll;
-   height: 100vh;
+   height: 65vh;
    width: 85%; 
    padding: 15px;
    margin: auto;
@@ -69,7 +69,6 @@
 .container::-webkit-scrollbar {
   width: 0px; 
   background: transparent; 
-  overscroll-behavior: contain;
 }
 
 .place-name {
