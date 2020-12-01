@@ -1,33 +1,56 @@
 .search-field:hover {
-  background-color:orange;
-  border: 2px solid rgba(100, 149, 237);
+  background-color:rgba(255, 165, 0, 0.8);
+  border: 2px solid #6495ed;
   transition: 1s all;
   }
 
 .search-button:hover {
-/* border: 2px solid orange; */
-/* border-radius: 14px; */
-background-color:orange;
-border: 2px solid rgba(100, 149, 237);
-transition: 1s all;
+  background-color:rgba(255, 165, 0, 0.8);
+  border: 2px solid rgba(100, 149, 237) ;
+  transition: 1s all;
+}
+
+h1 > a:hover {
+  color: rgb(236, 204, 47);
+}
+
+.error-home-link:hover {
+  color:rgba(255, 165, 0);
+}
+
+.error-footer a:hover {
+  transform: scale(1.1);
+}
+
+.homepage-footer a:hover {
+  transform: scale(1.1);
+}
+
+.about-us-main {
+  overflow: scroll;
 }
 
 .scroll{
-  height:240px;
-  width:500px;
+  height:450px;
+  width:750px;
   overflow: scroll;
   display: flex;
   flex-direction: row;
   margin-top: 50px;
   margin-bottom: 10px;
-  border: 5px solid white;
-  padding: 5px;
-  border-radius: 15px;
+  /* border: 5px solid white; */
+  padding: 25px;
+  /* border-radius: 15px; */
   -webkit-animation: fadein 2s;
 }
 
 .rikoimages{
-  padding-right: 5px;
+  padding-right: 30px;
+}
+
+.rikoimages:hover{
+  transition: 1s all;
+  transform: scale(1.1);
 }
 
 .mainImage{
@@ -37,9 +60,9 @@ margin-bottom: 10px;
 -webkit-animation: fadein 2s;
 }
 
-.firstImage{
-  border: 5px inset white;
-  border-radius: 10px;
+.firstImage:hover{
+  transition: 1s all;
+  transform: scale(1.1);
 }
 
 .detailsDesc{
@@ -47,11 +70,13 @@ margin-bottom: 10px;
   color: white;
   background-color: rgba(21, 27, 27, 0.6);
   font-family: 'Josefin Sans', sans-serif;
+  margin-top: 50px;
+  width: inherit;
 }
 
 .detailsButton{
   -webkit-animation: fadein 2s;
-  background-color: rgba(21, 27, 27, 0.6);
+  background-color: rgba(38, 47, 47, 0.6);
   font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;
   color: white;
@@ -63,13 +88,21 @@ margin-bottom: 10px;
   transition: 2s all;
 }
 
+.detailsButton:hover{
+  background-color: rgb(0, 0, 0);
+  transition: 1s all;
+  transform: scale(1.1);
+}
+
+
 .formButtons{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 200%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  /* margin-top: 7px; */
+  margin-bottom: 40px;
+  padding-bottom: 10px;
 }
 
 .detBoardingBut{
@@ -87,13 +120,20 @@ margin-bottom: 10px;
   margin-bottom: 10px;
 }
 
+.detBoardingBut:hover{
+  background-color: rgb(0, 0, 0);
+  transition: 1s all;
+  transform: scale(1.1);
+}
+
 .noteForm{
   margin-top: 50px;
-  width: 500px;
+  margin-bottom: 50px;
+  width: 785px;
   text-align: center;
 }
 
- textarea{
+textarea {
   width: inherit;
   height: 80px;
   border: 5px solid rgba(21, 27, 27, 0.1);
