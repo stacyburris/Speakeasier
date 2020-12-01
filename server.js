@@ -47,79 +47,78 @@ function getCity(req, res) {
   if (req.query.city === 'speakeasier' || req.query.city === 'Speakeasier' || req.query.city === 'SPEAKEASIER') {
     res.sendFile('./public/about-us.html', {root: __dirname })
   } else {
+    let obj = {};
+    let city = req.query.city;
+    let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
 
-  let obj = {};
-  let city = req.query.city;
-  let googleKn = `https://kgsearch.googleapis.com/v1/entities:search?query=${city}&key=${GOOGLE_KN_API_KEY}`;
-
-  superagent.get(googleKn)
-    .then(data => {
-      let array = [];
-      data.body.itemListElement.map(results => {
-        array.push(results.result);
-      })
-      if (!array[0] || !array[0].detailedDescription.articleBody) {
-        res.render('./pages/error', wack);
-      }
-      obj.description = array[0].detailedDescription.articleBody;
-      obj.name = array[0].name;
-    })
-    .then(() => {
-      let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
-      superagent.get(urlPlaceId)
-        .then(data => {
-          let pocket = data.body.candidates;
-          // console.log('DATA.BODY:', data.body);
-          let photoRefs = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pocket[0].place_id}&key=${GOOGLE_API_KEY}`;
-
-          ////////////////////////// Country Info . . . on hold. //////////////////////////////////
-          // superagent.get(photoRefs)
-          //   .then(data => {
-          //     let formattedAddress = data.body.result.formatted_address;
-          //     console.log('Formatted Address:', formattedAddress);
-          //     let countryURL = 'https://restcountries.eu/rest/v2/all';
-
-          //     superagent.get(countryURL)
-          //       .then(carrot => {
-          //         let body = carrot.body;
-          //         body.forEach(value => {
-          //         })
-          //       console.log(body[1].name);
-          //         // for (let i=0; i<carrot.length; i++) {
-          //         //     if (carrot[i].name = formattedAddress) {
-          //         })
-          //       })
-          ////////////////////////// Country Info . . . on hold. //////////////////////////////////
-
-          superagent.get(photoRefs)
-            .then(data => {
-              // console.log('PLACE-ID:', data);
-              let photoReferenceArray = data.body.result.photos;
-              return photoReferenceArray.map(photos => photos.photo_reference)
-            })
-            .then(data => {
-              let array = data.map(photoArray => {
-                let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=300&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
-                return url;
-              })
-              return array;
-            })
-            .then(banana => {
-              let photoArray = [];
-              banana.forEach(apple => {
-                photoArray.push(superagent.get(apple));
-              })
-              Promise.all(photoArray)
-                .then(potatoes => {
-                  obj.photo = potatoes;
-                  res.render('./pages/details', { render: obj });
-                })
-                .catch(err => {
-                  res.render('./pages/error', err);
-                })
-            })
+    superagent.get(googleKn)
+      .then(data => {
+        let array = [];
+        data.body.itemListElement.map(results => {
+          array.push(results.result);
         })
-    })
+        if (!array[0] || !array[0].detailedDescription.articleBody) {
+          res.render('./pages/error', wack);
+        }
+        obj.description = array[0].detailedDescription.articleBody;
+        obj.name = array[0].name;
+      })
+      .then(() => {
+        let urlPlaceId = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${city}&inputtype=textquery&key=${GOOGLE_API_KEY}`;
+        superagent.get(urlPlaceId)
+          .then(data => {
+            let pocket = data.body.candidates;
+            // console.log('DATA.BODY:', data.body);
+            let photoRefs = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pocket[0].place_id}&key=${GOOGLE_API_KEY}`;
+
+            ////////////////////////// Country Info . . . on hold. //////////////////////////////////
+            // superagent.get(photoRefs)
+            //   .then(data => {
+            //     let formattedAddress = data.body.result.formatted_address;
+            //     console.log('Formatted Address:', formattedAddress);
+            //     let countryURL = 'https://restcountries.eu/rest/v2/all';
+
+            //     superagent.get(countryURL)
+            //       .then(carrot => {
+            //         let body = carrot.body;
+            //         body.forEach(value => {
+            //         })
+            //       console.log(body[1].name);
+            //         // for (let i=0; i<carrot.length; i++) {
+            //         //     if (carrot[i].name = formattedAddress) {
+            //         })
+            //       })
+            ////////////////////////// Country Info . . . on hold. //////////////////////////////////
+
+            superagent.get(photoRefs)
+              .then(data => {
+                // console.log('PLACE-ID:', data);
+                let photoReferenceArray = data.body.result.photos;
+                return photoReferenceArray.map(photos => photos.photo_reference)
+              })
+              .then(data => {
+                let array = data.map(photoArray => {
+                  let url = `https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photoreference=${photoArray}&key=${GOOGLE_API_KEY}`;
+                  return url;
+                })
+                return array;
+              })
+              .then(banana => {
+                let photoArray = [];
+                banana.forEach(apple => {
+                  photoArray.push(superagent.get(apple));
+                })
+                Promise.all(photoArray)
+                  .then(potatoes => {
+                    obj.photo = potatoes;
+                    res.render('./pages/details', { render: obj });
+                  })
+                  .catch(err => {
+                    res.render('./pages/error', err);
+                  })
+              })
+          })
+      })
   }
 }
 
@@ -214,7 +213,7 @@ function addNotesBoarding(req, res) {
   // console.log('this is ok:', ok);
   let SQL = `UPDATE boarding SET journal='${awesome}' WHERE id=${ok} RETURNING *;`;
   // let SQL = `INSERT INTO boarding WHERE journal='${awesome}' WHERE id=${ok} RETURNING *;`;
-  
+
   client.query(SQL)
     .then(res.redirect(`/getSavedBoarding?id=${ok}`))
     .catch(err => console.error(err));

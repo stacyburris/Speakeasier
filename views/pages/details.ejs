@@ -8,15 +8,19 @@
 <body class="detailsBody">
 
   <header>
-    <h1><%= render.name %></h1>
+    <div class="testH1">
+      <h1><%= render.name %></h1>
+    </div>
 
-    <nav>
-      <a href="/">HOME</a>
+    <nav class="detailsNav">
+      <a class="aDetails" href="/">HOME</a>
+      <a class="aDetails" href="/boarding">BOARDING</a>
+      <a class="aDetails" href="/stamped">STAMPED</a>
     </nav>
 
   </header>
 
-  <main>
+  <main class="testCenter">
     <% let imageArray = [] %>
     <% render.photo.forEach(photo => { %>
     <% imageArray.push(photo.request.url) %>

@@ -4,6 +4,7 @@ h1 {
   font-weight: bolder;
   color: white;
   -webkit-animation: fadein 2s;
+  text-align: center;
 }
 
 h1 a {
@@ -28,9 +29,38 @@ a {
   font-size: 1.5vw;
 }
 
+.detailsNav{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 6px solid white;
+  padding-top: 30px;
+  width: 800px;
+}
+
+.aDetails{
+  font-family: 'Limelight', cursive;
+  color: white;
+  font-size: 20px;
+}
+
+.aDetailsS{
+  text-decoration: underline;
+  color: white;
+  font-size: 20px;
+}
+
+.aDetails:hover{
+  transform: scale(1.1);
+}
+
+.aDetailsS:hover{
+  color: rgb(93, 93, 93);
+  transform: scale(1.1);
+}
+
 nav {
   font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Limelight', cursive;
   font-size: small;
   text-align: center;
 }
@@ -117,7 +147,7 @@ body{
 .stampedDetailsBody{
   width: 18.5vw;
   height: 66.5vh;
-  background: url("/img/3.PNG") no-repeat center fixed;
+  background: url("/img/yellow.JPG") no-repeat center fixed;
   background-size: cover;
   margin: auto;
   display: flex;
