@@ -1,18 +1,26 @@
 .boarding-back{
-   background: url('../img/red.PNG') rgb(228, 188, 188) no-repeat center fixed;
-   /* overflow: hidden; */
+   background: url('../img/pink-door\ \(2\).jpg') rgb(228, 188, 188) no-repeat center fixed;
+ 
    background-size: cover;
-   /* border: 20px solid rgb(172, 154, 154); */
-   /* border-radius: 15px;  */
+ 
    box-sizing: border-box;
    }
+.stamped-back{
+  background: url('../img/cactus-green-door\ \(2\).jpg') rgb(29, 85, 66) no-repeat center fixed;
+  background-size: cover;
 
+  
+  /* background-position: left 50px top 20px; */
+ 
+   box-sizing: border-box;
+}
  #boarding-header{
   font-family: 'Limelight', cursive;
-  font-size: 5vw;
+  font-size: 4.2vw;
   color: white;
   border-radius: 10px;
-  padding: 15px 35px;
+  padding: 20px 35px 5px 35px;
+  /* border: 2px black solid; */
 } 
 
 .header-box{
@@ -21,58 +29,87 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding-top: 10px;
 }
 
 .navers {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  width: 30%;
+  /* width: 25%; */
+  border-top: 6px solid white;
+  /* padding-top: 5px; */
+  width: 90%;
 } 
 
 .navers a{
- margin: 5px;
- text-align: center;
- border-radius: 10px;
-padding: 10px;
-width: 20vw;
-color:rgba(36, 30, 30, 0.925);
-background-color: whitesmoke;
-font-family: 'Josefin Sans', sans-serif;
+
+padding: 30px 20px 0px 30px;
+/* width: 20vw; */
+color:white;
+/* background-color: whitesmoke; */
+font-family: 'Limelight', cursive;
 }
 
  .container{
    overflow: scroll;
    height: 100vh;
-   width: 90%; 
-   padding: 20px;
+   width: 85%; 
+   padding: 15px;
    margin: auto;
+   /* border: 2px white solid; */
+  
 }
-
 .container::-webkit-scrollbar{
   width: 0px; 
  background: transparent; 
+  
 }
 
 .place-name{
   display: flex;
   flex-wrap: wrap;
-  margin: 10px;
+  margin: 5px 0px 5px 0px;
+
 }
 
 .images-role{
-  border-radius: 10px;
+  border-radius: 5px;
+  padding-left: 1vw;
+  padding-top: 1vh;
+  padding-bottom: 2vh;
+  /* padding: 5px; */
+
+
+}
+
+.images-role-stamp{
+  border-radius: 5px;
+  padding-bottom: 2vh;
+  margin-bottom: 3vh;
+  margin-top: 3vh;
 }
 
 .images{ 
-   border: 4px solid rgb(172, 154, 154);
+   border: 4px solid rgb(206, 194, 194);
   width: 15vw;
   border-radius: 8px;
+  
+  
+}
+
+.images:hover{
+  transition: 1s all;
+  transform: scale(1.1);
 }
 
 .three-buttons{
-  margin-left: 3vw;
+ margin-left: 3vw;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .hugs{
@@ -80,6 +117,8 @@ font-family: 'Josefin Sans', sans-serif;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  /* padding-top: 5vh; */
 }
 
 .background-image {
@@ -169,20 +208,21 @@ transition: 1s all;
 .loc-name{
   outline: none;
   font-family: 'Limelight', cursive;
-  font-size: 2vw;
+  font-size: 1.6vw;
   padding: 5%;
-  border: 2px solid rgb(206, 194, 194);
-  border-radius: 12px;
-  background-color: rgba(252, 242, 212, 0.952);
+  border: 2px solid rgb(155, 150, 150);
+  border-radius: 10px;
+  background-color: rgb(206, 194, 194);
   font-weight: bolder;
-  color: rgba(36, 30, 30, 0.925);
+  color:rgb(66, 61, 61);
   transition: 1s all;
-  width: 20vw;
+  width: 19vw;
+  
 }
 
 .loc-name:hover {
-  background-color:rgb(206, 194, 194);
-  border: 2px solid rgba(252, 242, 212, 0.952);
+  background-color:rgb(228, 220, 199);
+  border: 2px solid rgba(252, 242, 212);
   transition: 1s all;
   cursor: pointer;
   }
@@ -192,18 +232,18 @@ transition: 1s all;
   font-family: 'Josefin Sans', sans-serif;
   font-size: .8vw;
   padding: 3%;
-  border: 2px solid rgb(206, 194, 194);
-  border-radius: 12px;
-  background-color: rgba(252, 242, 212, 0.952);
-  font-weight: bolder;
-  color:rgba(36, 30, 30, 0.925);
+  border: 2px solid  rgb(155, 150, 150);
+  border-radius: 10px;
+  background-color: rgb(206, 194, 194);
+  /* font-weight: bolder; */
+  color:rgb(53, 51, 51);
   margin: 5%;
   transition: 1s all;
 }
 
 .back-buttons:hover {
-  background-color:rgb(206, 194, 194);
-  border: 2px solid rgba(252, 242, 212, 0.952);
+  background-color:rgb(228, 220, 199);
+  border: 2px solid rgba(252, 242, 212);
   transition: 1s all;
   cursor: pointer;
   }
