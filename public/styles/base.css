@@ -66,11 +66,10 @@ nav {
 }
 
 .homepage-body {
-  position: relative;
-  width: 60%;
+  background: url('../img/home.jpg') no-repeat center fixed;
+  background-size: cover;
+  width: 50%;
   margin: auto;
-  margin-top: 1%;
-  margin-bottom: 2%;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -80,8 +79,7 @@ nav {
 
 .error-body {
   position: relative;
-  width: 60%;
-  /* height: 50%; */
+  width: 50%;
   margin: auto;
   margin-top: 1%;
   margin-bottom: 2%;
@@ -91,7 +89,6 @@ nav {
   justify-content: space-between;
   align-items: center;
 }
-
 
 .homepage-header {
   margin-top: 3vh;
@@ -104,8 +101,10 @@ nav {
 .homepage-main {
   z-index: 2;
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
+  /* border: 3px solid white; */
 }
 
 .about-us-main {
@@ -114,9 +113,9 @@ nav {
   z-index: 2;
 }
 
-body{
+body {
   width: 50%;
-  height: 115vh;
+  height: 90vh;
   margin: auto;
   }
   
@@ -158,10 +157,8 @@ body{
 }
 
 .homepage-footer {
-  height: 28vh;
   width: 60%;
   z-index: 2; 
-  margin-top: 20vh;
 }
 
 .homepage-footer-div {
@@ -174,7 +171,7 @@ body{
   position: absolute;
   bottom: 0;
   z-index: 2; 
-  height: 16vh;
+  height: 7vh;
 }
 
 .error-footer-div {
