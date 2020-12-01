@@ -68,10 +68,9 @@ margin-bottom: 10px;
 .detailsDesc{
   padding: 15px;
   color: white;
-  background-color: rgba(21, 27, 27, 0.6);
   font-family: 'Josefin Sans', sans-serif;
   margin-top: 50px;
-  width: inherit;
+  /* width: inherit; */
 }
 
 .detailsButton{
