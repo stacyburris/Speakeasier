@@ -44,7 +44,7 @@ app.get('/getSavedStamped', getSavedStamped);
 app.get('*', renderErrorPage);
 
 function getCity(req, res) {
-  if (req.query.city === 'speakeasier') {
+  if (req.query.city === 'speakeasier' || req.query.city === 'Speakeasier' || req.query.city === 'SPEAKEASIER') {
     res.sendFile('./public/about-us.html', {root: __dirname })
   } else {
 
@@ -231,9 +231,8 @@ function addNotesStamped(req, res) {
 }
 
 async function renderErrorPage(req, res) {
-  let message = 'No door here. Please go back and look elsewhere.'
+  let message = 'No door here. Please look elsewhere.'
   let wack = { error: message };
-  console.log(wack);
  await res.render('./pages/error', wack);
 }
 
