@@ -5,10 +5,17 @@ const cors = require('cors');
 const app = express();
 const superagent = require('superagent');
 const methodOverride = require('method-override');
-const pg = require('pg');
+const { Client } = require('pg');
 
 require('dotenv').config();
-const client = new pg.Client(process.env.DATABASE_URL);
+
+// Had this error: "(node:4) UnhandledPromiseRejectionWarning: error: no pg_hba.conf entry for host "3.90.147.57", user "aulknsiueeokdx", database "dean31pk6gapmq", SSL off"; fixed it by running this command in the terminal: heroku config:set PGSSLMODE=no-verify -a speakeasier; alternatively, according to the docs at https://devcenter.heroku.com/articles/heroku-postgresql#connecting-in-node-js, the ssl could be set to rejectUnauthorized: false;
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  // ssl: {
+  //   rejectUnauthorized: false
+  // }
+});
 const PORT = process.env.PORT || 3333;
 
 app.use(cors());
