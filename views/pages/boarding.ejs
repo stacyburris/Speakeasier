@@ -6,8 +6,8 @@
 </head>
 
 <body class="boarding-back">
+  
   <header class="header-box">
-
     <section>
       <h2 id="boarding-header">BOARDING</h2>
     </section>
@@ -15,43 +15,39 @@
       <a id="home" href="/">HOME</a>
       <a id="stamp" href="/stamped">STAMPED</a>
     </section>
-
-
   </header>
 
   <main>
     <section class="container">
       <ul>
         <% boardingData.forEach(location=>{%>
-        <li class="place-name" data-id="<%= location.id %>">
-          <div class="images-role">
-            <img class="images" src="<%= location.special %>">
-          </div>
-          <div class="three-buttons">
-            <div class="hugs">
-              <form action="/getSavedBoarding" method="GET">
-                <input type="hidden" name="id" value="<%=location.id %>">
-                <input class="loc-name" type="submit" value="<%= location.city_name %>">
-              </form>
-              <div class="surrounder">
-                <form action="/deleteBoarding/<%=location.id%>?_method=DELETE" method="POST">
-                  <button class="back-buttons" type="submit">REMOVE THIS LOCATION</button>
+          <li class="place-name" data-id="<%= location.id %>">
+            <div class="images-role">
+              <img class="images" src="<%= location.special %>">
+            </div>
+            <div class="three-buttons">
+              <div class="hugs">
+                <form action="/getSavedBoarding" method="GET">
+                  <input type="hidden" name="id" value="<%=location.id %>">
+                  <input class="loc-name" type="submit" value="<%= location.city_name %>">
                 </form>
-                <form action="/move/<%=location.id%>?_method=PUT" method="POST">
-                  <button class="back-buttons" type="submit">MOVE TO STAMPED</button>
-                </form>
+                <div class="surrounder">
+                  <form action="/deleteBoarding/<%=location.id%>?_method=DELETE" method="POST">
+                    <button class="back-buttons" type="submit">REMOVE THIS LOCATION</button>
+                  </form>
+                  <form action="/move/<%=location.id%>?_method=PUT" method="POST">
+                    <button class="back-buttons" type="submit">MOVE TO STAMPED</button>
+                  </form>
+                </div>
               </div>
             </div>
-          </div>
-        </li>
-
-        <%})%>
-
+          </li>
+          <%})%>
       </ul>
     </section>
 
   </main>
-  </div>
+  
 </body>
 
 </html>
