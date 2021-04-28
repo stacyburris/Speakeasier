@@ -130,7 +130,7 @@ function getCity(req, res) {
       .catch(err => {
         console.log('ERROR', err);
         res.render('./pages/error', err);
-    })
+      })
   }
 }
 
